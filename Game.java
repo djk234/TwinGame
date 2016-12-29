@@ -2,15 +2,23 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
+import java.awt.event.KeyEvent;
 
 public class Game extends Canvas implements Runnable {
 
-  public static final int WIDTH = 640, HEIGHT = WIDTH / 12*9;
+  public static final int WIDTH = 640, HEIGHT = WIDTH / 12*9, SQUARE = 16;
   private Thread thread;
   private boolean running = false;
 
+  private Handler handler;
+
   public Game(){
+    handler = new Handler();
+    this.addKeyListener(new KeyInput(handler));
+
     new Window(WIDTH, HEIGHT, "Twin Game", this);
+
+    handler.addObject(new Player(WIDTH/2-SQUARE/2,HEIGHT/2-SQUARE/2, ID.Player));
   }
 
   public synchronized void start(){
@@ -50,7 +58,7 @@ public class Game extends Canvas implements Runnable {
 
       if(System.currentTimeMillis() - timer > 1000){
         timer += 1000;
-        System.out.println("FPS: " + frames);
+        //System.out.println("FPS: " + frames);
         frames = 0;
       }
     }
@@ -58,7 +66,7 @@ public class Game extends Canvas implements Runnable {
   }
 
   private void tick(){
-
+    handler.tick();
   }
 
   private void render(){
@@ -72,6 +80,8 @@ public class Game extends Canvas implements Runnable {
 
     g.setColor(Color.black);
     g.fillRect(0,0,WIDTH,HEIGHT);
+
+    handler.render(g);
     g.dispose();
     bs.show();
   }
