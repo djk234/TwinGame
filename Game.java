@@ -3,15 +3,15 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
-  public static final int WIDTH = 640, HEIGHT = WIDTH / 12*9, SQUARE = 16;
+  public static int WIDTH = 640, HEIGHT = WIDTH / 12 * 9, SQUARE = 16;
   private Thread thread;
   private boolean running = false;
-
   private Handler handler;
-
+  Random rand = new Random();
   private HUD hud;
 
   public Game(){
@@ -19,12 +19,22 @@ public class Game extends Canvas implements Runnable {
     this.addKeyListener(new KeyInput(handler));
 
     new Window(WIDTH, HEIGHT, "Twin Game", this);
-
     hud = new HUD();
-
+    int rows = HEIGHT / SQUARE;
+    int cols = WIDTH / SQUARE;
+    for(int r = 0; r < rows; r++){
+      for(int c = 0; c < cols; c++){
+        int n = rand.nextInt(25) + 1;
+        if(n == 10){
+          handler.addObject(new Obstacle(c*SQUARE, r*SQUARE, ID.Obstacle));
+        }
+        else{
+          handler.addObject(new Background(c*SQUARE, r*SQUARE, ID.Background));
+        }
+      }
+    }
     handler.addObject(new Player(WIDTH/2-SQUARE/2,HEIGHT/2-SQUARE/2, ID.Player, handler));
     handler.addObject(new BasicEnemy(100,100, ID.BasicEnemy, handler));
-    handler.addObject(new Background(320,350, ID.Background, false));
   }
 
   public synchronized void start(){

@@ -31,9 +31,8 @@ public class BasicEnemy extends GameObject {
   private void collision(){
     for(int i = 0; i < handler.object.size(); i++){
       GameObject tempObject = handler.object.get(i);
-      if(tempObject.getId() == ID.Background){
-        Background newtempObject = (Background) tempObject;
-        if(getBounds().intersects(tempObject.getBounds()) && !newtempObject.getPassable()){
+      if(tempObject.getId() == ID.Obstacle){
+        if(getBounds().intersects(tempObject.getBounds())){
           if (Math.abs(y - tempObject.getY()) < Game.SQUARE){
             velX *= -1;
           }

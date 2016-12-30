@@ -41,14 +41,15 @@ public class Player extends GameObject {
           intersecting = false;
         }
       }
-      if(tempObject.getId() == ID.Background){
-        Background newtempObject = (Background) tempObject;
-        if(getBounds().intersects(tempObject.getBounds()) && !newtempObject.getPassable()){
+      if(tempObject.getId() == ID.Obstacle){
+        if(getBounds().intersects(tempObject.getBounds())){
           if (Math.abs(y - tempObject.getY()) < Game.SQUARE){
+            System.out.println("sIde");
             x -= velX;
             velX = 0;
           }
           else if (Math.abs(x - tempObject.getX()) < Game.SQUARE){
+            System.out.println("Top");
             y -= velY;
             velY = 0;
           }
