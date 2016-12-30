@@ -33,10 +33,10 @@ public class BasicEnemy extends GameObject {
       GameObject tempObject = handler.object.get(i);
       if(tempObject.getId() == ID.Obstacle){
         if(getBounds().intersects(tempObject.getBounds())){
-          if (Math.abs(y - tempObject.getY()) < Game.SQUARE){
+          if (Math.abs((y - velY) - tempObject.getY()) < Game.SQUARE){
             velX *= -1;
           }
-          else if (Math.abs(x - tempObject.getX()) < Game.SQUARE){
+          else if (Math.abs((x-velX) - tempObject.getX()) < Game.SQUARE){
             velY *= -1;
           }
           else {

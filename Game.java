@@ -3,7 +3,8 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.event.KeyEvent;
-import java.util.Random;
+import java.util.*;
+import java.io.*;
 
 public class Game extends Canvas implements Runnable {
 
@@ -11,10 +12,14 @@ public class Game extends Canvas implements Runnable {
   private Thread thread;
   private boolean running = false;
   private Handler handler;
-  Random rand = new Random();
+  public ArrayList<ArrayList<String>> map;
   private HUD hud;
+  public static int currentTopRow = 0;
+  public static int currentLeftCol = 0;
 
-  public Game(){
+  public Game(String text){
+    this.map = makeMap(text);
+
     handler = new Handler();
     this.addKeyListener(new KeyInput(handler));
 
@@ -22,19 +27,40 @@ public class Game extends Canvas implements Runnable {
     hud = new HUD();
     int rows = HEIGHT / SQUARE;
     int cols = WIDTH / SQUARE;
-    for(int r = 0; r < rows; r++){
-      for(int c = 0; c < cols; c++){
-        int n = rand.nextInt(25) + 1;
-        if(n == 10){
+    System.out.println(rows+" by "+cols);
+    int numRows = map.size();
+    for(int r = 0; r < numRows; r++){
+      ArrayList<String> currentRow = map.get(r);
+      int numCols = currentRow.size();
+      for(int c = 0; c < numCols; c++){
+        String currentBlock = currentRow.get(c);
+        if(currentBlock.equals("Obstacle")){
           handler.addObject(new Obstacle(c*SQUARE, r*SQUARE, ID.Obstacle));
         }
-        else{
+        else if (currentBlock.equals("Background")){
           handler.addObject(new Background(c*SQUARE, r*SQUARE, ID.Background));
+        }
+        else {
         }
       }
     }
     handler.addObject(new Player(WIDTH/2-SQUARE/2,HEIGHT/2-SQUARE/2, ID.Player, handler));
-    handler.addObject(new BasicEnemy(100,100, ID.BasicEnemy, handler));
+  }
+
+  public static int getTopRow() {
+    return currentTopRow;
+  }
+
+  public static void setTopRow(int row){
+    currentTopRow = row;
+  }
+
+  public static int getLeftCol() {
+    return currentLeftCol;
+  }
+
+  public static void setLeftCol(int col){
+    currentLeftCol = col;
   }
 
   public synchronized void start(){
@@ -118,7 +144,30 @@ public class Game extends Canvas implements Runnable {
     }
   }
 
+  public ArrayList<ArrayList<String>> makeMap(String text){
+    ArrayList<ArrayList<String>> map = new ArrayList<ArrayList<String>>();
+    ArrayList<String> rows = new ArrayList<String>(Arrays.asList(text.split("]")));
+    for(int r = 0; r < rows.size(); r++){
+      ArrayList<String> currentRow = new ArrayList<String>(Arrays.asList(rows.get(r).split(",")));
+      map.add(currentRow);
+    }
+    return map;
+  }
+
   public static void main(String args[]){
-    new Game();
+    File file = new File("map.txt");
+    try{
+      FileReader fr = new FileReader(file);
+      long length = file.length();
+      char [] a = new char[(int) length];
+      int size = fr.read(a);
+      String text = "";
+      for(char c : a){
+        text = text + c;
+      }
+      new Game(text);
+    }catch(IOException ex){
+      ex.printStackTrace();
+    }
   }
 }

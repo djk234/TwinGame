@@ -20,9 +20,17 @@ public class Player extends GameObject {
   public void tick() {
     x += velX;
     y += velY;
-
     x = Game.clamp(x, 0, Game.WIDTH-Game.SQUARE);
-    y = Game.clamp(y, 0, Game.HEIGHT-Game.SQUARE*2-Game.SQUARE/2);
+    int newY = Game.clamp(y, 0, Game.HEIGHT-Game.SQUARE*2-Game.SQUARE/2);
+    if (newY == Game.HEIGHT-Game.SQUARE*2-Game.SQUARE/2) {
+      Game.setTopRow(Game.getTopRow()+29);
+      newY = 1;
+    }
+    else if (newY == 0) {
+      System.out.println("going up");
+      newY = Game.HEIGHT-Game.SQUARE*2-Game.SQUARE/2 - 1;
+    }
+    y = newY;
 
     collision();
   }
@@ -43,13 +51,11 @@ public class Player extends GameObject {
       }
       if(tempObject.getId() == ID.Obstacle){
         if(getBounds().intersects(tempObject.getBounds())){
-          if (Math.abs(y - tempObject.getY()) < Game.SQUARE){
-            System.out.println("sIde");
+          if (Math.abs((y - velY) - tempObject.getY()) < Game.SQUARE){
             x -= velX;
             velX = 0;
           }
-          else if (Math.abs(x - tempObject.getX()) < Game.SQUARE){
-            System.out.println("Top");
+          else if (Math.abs((x-velX) - tempObject.getX()) < Game.SQUARE){
             y -= velY;
             velY = 0;
           }

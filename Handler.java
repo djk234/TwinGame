@@ -6,16 +6,28 @@ public class Handler {
   LinkedList<GameObject> object = new LinkedList<GameObject>();
 
   public void tick(){
-    for(int i = 0; i < object.size(); i++){
+    for(int i = 0; i < object.size(); i++) {
       GameObject tempObject = object.get(i);
-      tempObject.tick();
+      int minWidth = Game.getLeftCol()*Game.SQUARE;
+      int maxWidth = Game.getLeftCol()*Game.SQUARE + Game.WIDTH - Game.SQUARE;
+      int minHeight = Game.getTopRow()*Game.SQUARE;
+      int maxHeight = Game.getTopRow()*Game.SQUARE + Game.HEIGHT - Game.SQUARE;
+      if (tempObject.getX() >= minWidth && tempObject.getX() < maxWidth && tempObject.getY() >= minHeight && tempObject.getY() < maxHeight || tempObject.getId() != ID.Player){
+        tempObject.tick();
+      }
     }
   }
 
   public void render(Graphics g){
-    for(int i = 0; i < object.size(); i++){
+    for(int i = 0; i < object.size(); i++) {
       GameObject tempObject = object.get(i);
-      tempObject.render(g);
+      int minWidth = Game.getLeftCol()*Game.SQUARE;
+      int maxWidth = Game.getLeftCol()*Game.SQUARE + Game.WIDTH - Game.SQUARE;
+      int minHeight = Game.getTopRow()*Game.SQUARE;
+      int maxHeight = Game.getTopRow()*Game.SQUARE + Game.HEIGHT - Game.SQUARE;
+      if (tempObject.getX() >= minWidth && tempObject.getX() < maxWidth && tempObject.getY() >= minHeight && tempObject.getY() < maxHeight || tempObject.getId() == ID.Player){
+        tempObject.render(g);
+      }
     }
   }
 
