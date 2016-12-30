@@ -1,6 +1,7 @@
 public enum ID {
 
   Player(),
-  Enemy();
+  BasicEnemy(),
+  Background();
 
 }
