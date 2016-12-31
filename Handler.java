@@ -12,7 +12,7 @@ public class Handler {
       int maxWidth = Game.getLeftCol()*Game.SQUARE + Game.WIDTH - Game.SQUARE;
       int minHeight = Game.getTopRow()*Game.SQUARE;
       int maxHeight = Game.getTopRow()*Game.SQUARE + Game.HEIGHT - Game.SQUARE;
-      if (tempObject.getX() >= minWidth && tempObject.getX() < maxWidth && tempObject.getY() >= minHeight && tempObject.getY() < maxHeight || tempObject.getId() != ID.Player){
+      if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
         tempObject.tick();
       }
     }
@@ -25,7 +25,7 @@ public class Handler {
       int maxWidth = Game.getLeftCol()*Game.SQUARE + Game.WIDTH - Game.SQUARE;
       int minHeight = Game.getTopRow()*Game.SQUARE;
       int maxHeight = Game.getTopRow()*Game.SQUARE + Game.HEIGHT - Game.SQUARE;
-      if (tempObject.getX() >= minWidth && tempObject.getX() < maxWidth && tempObject.getY() >= minHeight && tempObject.getY() < maxHeight || tempObject.getId() == ID.Player){
+      if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
         tempObject.render(g);
       }
     }

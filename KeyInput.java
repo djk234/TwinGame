@@ -16,7 +16,7 @@ public class KeyInput extends KeyAdapter {
 
       if(tempObject.getId() == ID.Player){
         // Go Up
-        if(key == 38) 
+        if(key == 38)
           tempObject.setVelY(-2);
         // Go Down
         else if(key == 40)
