@@ -64,16 +64,17 @@ public class Player extends GameObject {
         }
         if(tempObject.getId() == ID.Obstacle){
           if(getBounds().intersects(tempObject.getBounds())){
-            System.out.println("collision");
-            if (Math.abs((y - velY) - tempObject.getY()) < Game.SQUARE){
+            System.out.println(tempObject);
+            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
               x -= velX;
               velX = 0;
             }
-            else if (Math.abs((x-velX) - tempObject.getX()) < Game.SQUARE){
+            else if (Math.abs((x-velX) - tempObject.getX()%Game.WIDTH) < Game.SQUARE){
               y -= velY;
               velY = 0;
             }
             else {
+              System.out.println("Both");
               x -= velX;
               y -= velY;
               velX = 0;
