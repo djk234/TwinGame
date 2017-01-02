@@ -3,6 +3,10 @@ public enum ID {
   Player(),
   BasicEnemy(),
   Background(),
-  Obstacle();
+  Obstacle(),
+  Grass1(),
+  Grass2(),
+  NPC(),
+  WordBubble();
 
 }

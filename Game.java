@@ -14,8 +14,10 @@ public class Game extends Canvas implements Runnable {
   private Handler handler;
   public ArrayList<ArrayList<String>> map;
   private HUD hud;
+  public State state;
   public static int currentTopRow = 0;
   public static int currentLeftCol = 0;
+  public static ArrayList<String> convo = new ArrayList<String>(Arrays.asList("Hello"));
 
   public Game(String text){
     this.map = makeMap(text);
@@ -25,6 +27,7 @@ public class Game extends Canvas implements Runnable {
 
     new Window(WIDTH, HEIGHT, "Twin Game", this);
     hud = new HUD();
+    state = State.Play;
     int rows = HEIGHT / SQUARE;
     int cols = WIDTH / SQUARE;
     System.out.println(rows+" by "+cols);
@@ -37,14 +40,22 @@ public class Game extends Canvas implements Runnable {
         if(currentBlock.equals("Obstacle")){
           handler.addObject(new Obstacle(c*SQUARE, r*SQUARE, ID.Obstacle));
         }
-        else if (currentBlock.equals("Background")){
-          handler.addObject(new Background(c*SQUARE, r*SQUARE, ID.Background));
+        else if (currentBlock.equals("Grass1")){
+          handler.addObject(new Grass1(c*SQUARE, r*SQUARE, ID.Grass1));
+        }
+        else if (currentBlock.equals("Grass2")){
+          handler.addObject(new Grass2(c*SQUARE, r*SQUARE, ID.Grass2));
+        }
+        else if (currentBlock.equals("NPC")){
+          handler.addObject(new NPC(c*SQUARE, r*SQUARE, ID.NPC, convo));
         }
         else {
         }
       }
     }
     handler.addObject(new Player(WIDTH/2-SQUARE/2,HEIGHT/2-SQUARE/2, ID.Player, handler));
+    //handler.addObject(new WordBubble(0, 0, ID.WordBubble, convo));
+
   }
 
   public static int getTopRow() {

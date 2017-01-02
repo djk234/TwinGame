@@ -62,7 +62,27 @@ public class Player extends GameObject {
             intersecting = false;
           }
         }
-        if(tempObject.getId() == ID.Obstacle){
+        else if(tempObject.getId() == ID.Obstacle){
+          if(getBounds().intersects(tempObject.getBounds())){
+            System.out.println(tempObject);
+            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
+              x -= velX;
+              velX = 0;
+            }
+            else if (Math.abs((x-velX) - tempObject.getX()%Game.WIDTH) < Game.SQUARE){
+              y -= velY;
+              velY = 0;
+            }
+            else {
+              System.out.println("Both");
+              x -= velX;
+              y -= velY;
+              velX = 0;
+              velY = 0;
+            }
+          }
+        }
+        else if(tempObject.getId() == ID.NPC){
           if(getBounds().intersects(tempObject.getBounds())){
             System.out.println(tempObject);
             if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
@@ -87,7 +107,59 @@ public class Player extends GameObject {
   }
 
   public void render(Graphics g) {
-    g.setColor(Color.white);
-    g.fillRect(x, y, Game.SQUARE, Game.SQUARE);
+    // Front Facing Still
+    // Skin Color
+    g.setColor(new Color(224,172,105));
+    for(int i = 4; i < 12; i++) {
+      g.fillRect(x%Game.WIDTH+i, y%Game.HEIGHT+1, 1, 1);
+    }
+    for(int i = 2; i < 7; i++) {
+      for(int j = 3; j < 13; j++){
+        g.fillRect(x%Game.WIDTH+j, y%Game.HEIGHT+i, 1, 1);
+      }
+    }
+    for(int i = 4; i < 12; i++) {
+      g.fillRect(x%Game.WIDTH+i, y%Game.HEIGHT+7, 1, 1);
+    }
+    g.fillRect(x%Game.WIDTH+3, y%Game.HEIGHT+10, 1, 1);
+    g.fillRect(x%Game.WIDTH+3, y%Game.HEIGHT+11, 1, 1);
+    g.fillRect(x%Game.WIDTH+12, y%Game.HEIGHT+10, 1, 1);
+    g.fillRect(x%Game.WIDTH+12, y%Game.HEIGHT+11, 1, 1);
+    // T Shirt
+    g.setColor(new Color(255,51,51));
+    for(int i = 4; i < 12; i++) {
+      g.fillRect(x%Game.WIDTH+i, y%Game.HEIGHT+8, 1, 1);
+    }
+    for(int i = 9; i < 11; i++) {
+      for(int j = 3; j < 13; j++){
+        g.fillRect(x%Game.WIDTH+j, y%Game.HEIGHT+i, 1, 1);
+      }
+    }
+    for(int i = 4; i < 12; i++) {
+      g.fillRect(x%Game.WIDTH+i, y%Game.HEIGHT+11, 1, 1);
+    }
+    for(int i = 5; i < 11; i++) {
+      g.fillRect(x%Game.WIDTH+i, y%Game.HEIGHT+12, 1, 1);
+    }
+    // Pants
+    g.setColor(new Color(0,50,100));
+    for(int i = 5; i < 11; i++) {
+      g.fillRect(x%Game.WIDTH+i, y%Game.HEIGHT+13, 1, 1);
+    }
+    g.fillRect(x%Game.WIDTH+5, y%Game.HEIGHT+14, 1, 1);
+    g.fillRect(x%Game.WIDTH+6, y%Game.HEIGHT+14, 1, 1);
+    g.fillRect(x%Game.WIDTH+9, y%Game.HEIGHT+14, 1, 1);
+    g.fillRect(x%Game.WIDTH+10, y%Game.HEIGHT+14, 1, 1);
+    g.setColor(Color.black);
+    g.fillRect(x%Game.WIDTH+4, y%Game.HEIGHT+15, 1, 1);
+    g.fillRect(x%Game.WIDTH+5, y%Game.HEIGHT+15, 1, 1);
+    g.fillRect(x%Game.WIDTH+6, y%Game.HEIGHT+15, 1, 1);
+    g.fillRect(x%Game.WIDTH+9, y%Game.HEIGHT+15, 1, 1);
+    g.fillRect(x%Game.WIDTH+10, y%Game.HEIGHT+15, 1, 1);
+    g.fillRect(x%Game.WIDTH+11, y%Game.HEIGHT+15, 1, 1);
+    g.fillRect(x%Game.WIDTH+5, y%Game.HEIGHT+4, 1, 1);
+    g.fillRect(x%Game.WIDTH+10, y%Game.HEIGHT+4, 1, 1);
+    // Right Facing Still
+
   }
 }
