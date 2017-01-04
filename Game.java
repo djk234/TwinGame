@@ -8,7 +8,8 @@ import java.io.*;
 
 public class Game extends Canvas implements Runnable {
 
-  public static int WIDTH = 640, HEIGHT = WIDTH / 12 * 9, SQUARE = 16;
+  public static final int WIDTH = 720, HEIGHT = WIDTH / 12 * 9, SQUARE = 32;
+  public static final int STARTX = WIDTH/2-SQUARE/2, STARTY = HEIGHT/2-SQUARE/2;
   private Thread thread;
   private boolean running = false;
   private Handler handler;
@@ -17,6 +18,7 @@ public class Game extends Canvas implements Runnable {
   public State state;
   public static int currentTopRow = 0;
   public static int currentLeftCol = 0;
+  public static int playerX = STARTX, playerY = STARTY;
   public static ArrayList<String> convo = new ArrayList<String>(Arrays.asList("Hello"));
 
   public Game(String text){
@@ -53,25 +55,25 @@ public class Game extends Canvas implements Runnable {
         }
       }
     }
-    handler.addObject(new Player(WIDTH/2-SQUARE/2,HEIGHT/2-SQUARE/2, ID.Player, handler));
+    handler.addObject(new Player(playerX, playerY, ID.Player, handler));
     //handler.addObject(new WordBubble(0, 0, ID.WordBubble, convo));
 
   }
 
-  public static int getTopRow() {
-    return currentTopRow;
+  public static int getPlayerX(){
+    return playerX;
   }
 
-  public static void setTopRow(int row){
-    currentTopRow = row;
+  public static void setPlayerX(int x){
+    playerX = x;
   }
 
-  public static int getLeftCol() {
-    return currentLeftCol;
+  public static int getPlayerY(){
+    return playerY;
   }
 
-  public static void setLeftCol(int col){
-    currentLeftCol = col;
+  public static void setPlayerY(int y){
+    playerY = y;
   }
 
   public synchronized void start(){

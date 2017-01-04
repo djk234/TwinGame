@@ -8,10 +8,10 @@ public class Handler {
   public void tick(){
     for(int i = 0; i < object.size(); i++) {
       GameObject tempObject = object.get(i);
-      int minWidth = Game.getLeftCol()*Game.SQUARE;
-      int maxWidth = Game.getLeftCol()*Game.SQUARE + Game.WIDTH - Game.SQUARE;
-      int minHeight = Game.getTopRow()*Game.SQUARE;
-      int maxHeight = Game.getTopRow()*Game.SQUARE + Game.HEIGHT - Game.SQUARE;
+      int minWidth = Game.getPlayerX() - Game.WIDTH/2 - Game.SQUARE;
+      int maxWidth = Game.getPlayerX() + Game.WIDTH/2 + Game.SQUARE;
+      int minHeight = Game.getPlayerY() - Game.HEIGHT/2 - Game.SQUARE;
+      int maxHeight = Game.getPlayerY() + Game.HEIGHT/2 + Game.SQUARE;
       if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
         tempObject.tick();
       }
@@ -21,10 +21,10 @@ public class Handler {
   public void render(Graphics g){
     for(int i = 0; i < object.size(); i++) {
       GameObject tempObject = object.get(i);
-      int minWidth = Game.getLeftCol()*Game.SQUARE;
-      int maxWidth = Game.getLeftCol()*Game.SQUARE + Game.WIDTH - Game.SQUARE;
-      int minHeight = Game.getTopRow()*Game.SQUARE;
-      int maxHeight = Game.getTopRow()*Game.SQUARE + Game.HEIGHT - Game.SQUARE;
+      int minWidth = Game.getPlayerX() - Game.WIDTH/2 - Game.SQUARE;
+      int maxWidth = Game.getPlayerX() + Game.WIDTH/2 + Game.SQUARE;
+      int minHeight = Game.getPlayerY() - Game.HEIGHT/2 - Game.SQUARE;
+      int maxHeight = Game.getPlayerY() + Game.HEIGHT/2 + Game.SQUARE;
       if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
         tempObject.render(g);
       }

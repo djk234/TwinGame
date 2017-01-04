@@ -12,7 +12,7 @@ public class Grass2 extends Background {
   }
 
   public Rectangle getBounds(){
-    return new Rectangle(x%Game.WIDTH, y%Game.HEIGHT,Game.SQUARE,Game.SQUARE);
+    return new Rectangle(x-Game.getPlayerX()+Game.WIDTH/2, y-Game.getPlayerY()+Game.HEIGHT/2, Game.SQUARE, Game.SQUARE);
   }
 
   public void tick() {
@@ -21,7 +21,8 @@ public class Grass2 extends Background {
 
   public void render(Graphics g) {
     g.setColor(new Color(86, 163, 10));
-    g.fillRect(x%Game.WIDTH, y%Game.HEIGHT,Game.SQUARE,Game.SQUARE);
+    g.fillRect(x-Game.getPlayerX()+Game.WIDTH/2, y-Game.getPlayerY()+Game.HEIGHT/2, Game.SQUARE, Game.SQUARE);
+    /*
     g.setColor(new Color(66, 143, 0));
     g.fillRect(x%Game.WIDTH, y%Game.HEIGHT+8,2,2);
     g.fillRect(x%Game.WIDTH+7, y%Game.HEIGHT+8,2,2);
@@ -54,6 +55,6 @@ public class Grass2 extends Background {
     g.fillRect(x%Game.WIDTH+5, y%Game.HEIGHT+12,2,2);
     g.fillRect(x%Game.WIDTH+6, y%Game.HEIGHT+12,2,2);
     g.fillRect(x%Game.WIDTH+10, y%Game.HEIGHT+12,2,2);
-    g.fillRect(x%Game.WIDTH+15, y%Game.HEIGHT+12,2,2);
+    g.fillRect(x%Game.WIDTH+15, y%Game.HEIGHT+12,2,2);*/
   }
 }

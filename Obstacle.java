@@ -9,7 +9,7 @@ public class Obstacle extends GameObject {
   }
 
   public Rectangle getBounds(){
-    return new Rectangle(x%Game.WIDTH, y%Game.HEIGHT,Game.SQUARE,Game.SQUARE);
+    return new Rectangle(x+Game.SQUARE/2, y+Game.SQUARE/2, Game.SQUARE, Game.SQUARE);
   }
 
   public void tick() {
@@ -18,6 +18,6 @@ public class Obstacle extends GameObject {
 
   public void render(Graphics g) {
     g.setColor(new Color(80,60,50));
-    g.fillRect(x%Game.WIDTH, y%Game.HEIGHT, Game.SQUARE, Game.SQUARE);
+    g.fillRect(x-Game.getPlayerX()+Game.WIDTH/2, y-Game.getPlayerY()+Game.HEIGHT/2, Game.SQUARE, Game.SQUARE);
   }
 }

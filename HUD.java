@@ -12,10 +12,10 @@ public class HUD {
 
   public void render(Graphics g){
     g.setColor(Color.gray);
-    g.fillRect(15,15,HEALTH_MAX,16);
+    g.fillRect(15,15,HEALTH_MAX,Game.SQUARE);
     g.setColor(Color.red);
-    g.fillRect(15,15,HEALTH,16);
+    g.fillRect(15,15,HEALTH,Game.SQUARE);
     g.setColor(Color.white);
-    g.drawRect(15,15,HEALTH_MAX,16);
+    g.drawRect(15,15,HEALTH_MAX,Game.SQUARE);
   }
 }
