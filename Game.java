@@ -3,6 +3,9 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.awt.event.KeyEvent;
+import java.awt.FontFormatException;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import java.util.*;
 import java.io.*;
 
@@ -10,6 +13,7 @@ public class Game extends Canvas implements Runnable {
 
   public static final int WIDTH = 720, HEIGHT = WIDTH / 12 * 9, SQUARE = 32;
   public static final int STARTX = WIDTH/2-SQUARE/2, STARTY = HEIGHT/2-SQUARE/2;
+  public static Font customfont;
   public static Player player;
   public static ArrayList<NPC> npcs = new ArrayList<NPC>();
   private Thread thread;
@@ -21,7 +25,6 @@ public class Game extends Canvas implements Runnable {
   public static int currentTopRow = 0;
   public static int currentLeftCol = 0;
   public static int playerX = STARTX, playerY = STARTY;
-  public static ArrayList<String> convo = new ArrayList<String>(Arrays.asList("Hello.","My name is David."));
 
   public Game(String text){
     this.map = makeMap(text);
@@ -50,7 +53,9 @@ public class Game extends Canvas implements Runnable {
           handler.addObject(new Grass2(c*SQUARE, r*SQUARE, ID.Grass2));
         }
         else if (currentBlock.contains("NPC")){
-          WordBubble bubble = new WordBubble(0, 0, ID.WordBubble, handler, convo);
+          ArrayList<String> fullobject = new ArrayList<String>(Arrays.asList(currentBlock.split("<")));
+          ArrayList<String> convo = new ArrayList<String>(Arrays.asList(fullobject.get(1).split(">")));
+          WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
           NPC newNPC = new NPC(c*SQUARE, r*SQUARE, ID.NPC, bubble);
           handler.addObject(newNPC);
           npcs.add(newNPC);
@@ -126,7 +131,7 @@ public class Game extends Canvas implements Runnable {
 
       if(System.currentTimeMillis() - timer > 1000){
         timer += 1000;
-        //System.out.println("FPS: " + frames);
+        System.out.println("FPS: " + frames);
         frames = 0;
       }
     }
@@ -181,6 +186,13 @@ public class Game extends Canvas implements Runnable {
 
   public static void main(String args[]){
     File file = new File("map.txt");
+    try {
+      customfont = Font.createFont(Font.TRUETYPE_FONT, new File("joystix monospace.ttf")).deriveFont(14f);
+      GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+      ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("joystix monospace.ttf")));
+    } catch (IOException|FontFormatException e) {
+      //Handle exception
+    }
     try{
       FileReader fr = new FileReader(file);
       long length = file.length();

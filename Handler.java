@@ -25,7 +25,11 @@ public class Handler {
       int maxWidth = Game.getPlayerX() + Game.WIDTH/2 + Game.SQUARE;
       int minHeight = Game.getPlayerY() - Game.HEIGHT/2 - Game.SQUARE;
       int maxHeight = Game.getPlayerY() + Game.HEIGHT/2 + Game.SQUARE;
+      if (tempObject.getId() == ID.WordBubble) {
+      }
       if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
+        if (tempObject.getId() == ID.WordBubble) {
+        }
         tempObject.render(g);
       }
     }

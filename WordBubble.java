@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.Font;
 import java.util.*;
 
 public class WordBubble extends GameObject{
@@ -47,6 +48,7 @@ public class WordBubble extends GameObject{
     g.fillRect(Game.SQUARE*2, Game.HEIGHT - 6*Game.SQUARE, Game.WIDTH - Game.SQUARE*4, Game.SQUARE*3);
     g.setColor(Color.black);
     g.drawRect(Game.SQUARE*2, Game.HEIGHT - 6*Game.SQUARE, Game.WIDTH - Game.SQUARE*4, Game.SQUARE*3);
+    g.setFont(Game.customfont);
     g.drawString(conversation.get(phrase), Game.SQUARE*3,Game.HEIGHT - 4*Game.SQUARE);
   }
 }
