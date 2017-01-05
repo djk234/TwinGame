@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.util.*;
 
 public class Player extends GameObject {
 
@@ -25,6 +26,17 @@ public class Player extends GameObject {
     Game.setPlayerY(y);
   }
 
+  public NPC checkTalking(){
+    ArrayList<NPC> npcs = Game.getNPCS();
+    for(int i = 0; i < npcs.size(); i++) {
+      NPC tempNPC = npcs.get(i);
+      if (getBounds().intersects(tempNPC.getSpeakBounds())){
+        return tempNPC;
+      }
+    }
+    return null;
+  }
+
   private void collision(){
     for(int i = 0; i < handler.object.size(); i++){
       GameObject tempObject = handler.object.get(i);
@@ -46,7 +58,6 @@ public class Player extends GameObject {
         }
         else if(tempObject.getId() == ID.Obstacle){
           if(getBounds().intersects(tempObject.getBounds())){
-            System.out.println(tempObject);
             if (Math.abs((y - velY) - tempObject.getY()) < Game.SQUARE){
               x -= velX;
               velX = 0;
@@ -56,17 +67,15 @@ public class Player extends GameObject {
               velY = 0;
             }
             else {
-              System.out.println("Both");
               x -= velX;
               y -= velY;
               velX = 0;
               velY = 0;
             }
           }
-        }/*
+        }
         else if(tempObject.getId() == ID.NPC){
           if(getBounds().intersects(tempObject.getBounds())){
-            System.out.println(tempObject);
             if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
               x -= velX;
               velX = 0;
@@ -76,14 +85,13 @@ public class Player extends GameObject {
               velY = 0;
             }
             else {
-              System.out.println("Both");
               x -= velX;
               y -= velY;
               velX = 0;
               velY = 0;
             }
           }
-        }*/
+        }
       }
     }
   }

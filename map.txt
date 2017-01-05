@@ -1,5 +1,5 @@
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
-Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
+Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,NPC,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]

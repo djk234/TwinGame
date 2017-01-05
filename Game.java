@@ -10,6 +10,8 @@ public class Game extends Canvas implements Runnable {
 
   public static final int WIDTH = 720, HEIGHT = WIDTH / 12 * 9, SQUARE = 32;
   public static final int STARTX = WIDTH/2-SQUARE/2, STARTY = HEIGHT/2-SQUARE/2;
+  public static Player player;
+  public static ArrayList<NPC> npcs = new ArrayList<NPC>();
   private Thread thread;
   private boolean running = false;
   private Handler handler;
@@ -19,7 +21,7 @@ public class Game extends Canvas implements Runnable {
   public static int currentTopRow = 0;
   public static int currentLeftCol = 0;
   public static int playerX = STARTX, playerY = STARTY;
-  public static ArrayList<String> convo = new ArrayList<String>(Arrays.asList("Hello"));
+  public static ArrayList<String> convo = new ArrayList<String>(Arrays.asList("Hello.","My name is David."));
 
   public Game(String text){
     this.map = makeMap(text);
@@ -32,32 +34,42 @@ public class Game extends Canvas implements Runnable {
     state = State.Play;
     int rows = HEIGHT / SQUARE;
     int cols = WIDTH / SQUARE;
-    System.out.println(rows+" by "+cols);
     int numRows = map.size();
     for(int r = 0; r < numRows; r++){
       ArrayList<String> currentRow = map.get(r);
       int numCols = currentRow.size();
       for(int c = 0; c < numCols; c++){
         String currentBlock = currentRow.get(c);
-        if(currentBlock.equals("Obstacle")){
+        if(currentBlock.contains("Obstacle")){
           handler.addObject(new Obstacle(c*SQUARE, r*SQUARE, ID.Obstacle));
         }
-        else if (currentBlock.equals("Grass1")){
+        else if (currentBlock.contains("Grass1")){
           handler.addObject(new Grass1(c*SQUARE, r*SQUARE, ID.Grass1));
         }
-        else if (currentBlock.equals("Grass2")){
+        else if (currentBlock.contains("Grass2")){
           handler.addObject(new Grass2(c*SQUARE, r*SQUARE, ID.Grass2));
         }
-        else if (currentBlock.equals("NPC")){
-          handler.addObject(new NPC(c*SQUARE, r*SQUARE, ID.NPC, convo));
+        else if (currentBlock.contains("NPC")){
+          WordBubble bubble = new WordBubble(0, 0, ID.WordBubble, handler, convo);
+          NPC newNPC = new NPC(c*SQUARE, r*SQUARE, ID.NPC, bubble);
+          handler.addObject(newNPC);
+          npcs.add(newNPC);
         }
         else {
         }
       }
     }
-    handler.addObject(new Player(playerX, playerY, ID.Player, handler));
-    //handler.addObject(new WordBubble(0, 0, ID.WordBubble, convo));
+    player = new Player(playerX, playerY, ID.Player, handler);
+    handler.addObject(player);
 
+  }
+
+  public static Player getPlayer(){
+    return player;
+  }
+
+  public static ArrayList<NPC> getNPCS(){
+    return npcs;
   }
 
   public static int getPlayerX(){

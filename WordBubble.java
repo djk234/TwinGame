@@ -7,9 +7,11 @@ public class WordBubble extends GameObject{
 
   public ArrayList<String> conversation;
   public int phrase = 0;
+  public Handler handler;
 
-  public WordBubble(int x, int y, ID id, ArrayList<String> conversation) {
+  public WordBubble(int x, int y, ID id, Handler handler, ArrayList<String> conversation) {
     super(x, y, id);
+    this.handler = handler;
     this.conversation = conversation;
   }
 
@@ -21,8 +23,15 @@ public class WordBubble extends GameObject{
     this.conversation = conversation;
   }*/
 
-  public void nextPhrase() {
-    phrase++;
+  public int nextPhrase() {
+    if(phrase < conversation.size() - 1){
+      phrase++;
+    }
+    else {
+      handler.removeObject(this);
+      phrase = 0;
+    }
+    return phrase;
   }
 
   public Rectangle getBounds(){

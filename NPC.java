@@ -8,14 +8,19 @@ public class NPC extends GameObject {
 
   Handler handler;
   ArrayList<String> conversation;
+  WordBubble bubble;
 
-  public NPC(int x, int y, ID id, ArrayList<String> conversation) {
+  public NPC(int x, int y, ID id, WordBubble bubble) {
     super(x, y, id);
     this.handler = handler;
-    this.conversation = conversation;
+    this.bubble = bubble;
   }
 
   public Rectangle getBounds(){
+    return new Rectangle(x,y,Game.SQUARE,Game.SQUARE);
+  }
+
+  public Rectangle getSpeakBounds(){
     return new Rectangle(x-1,y-1,Game.SQUARE+2,Game.SQUARE+2);
   }
 
@@ -24,7 +29,7 @@ public class NPC extends GameObject {
   }
 
   public void render(Graphics g) {
-    g.setColor(Color.white);
-    g.fillRect(x,y,Game.SQUARE,Game.SQUARE);
+    g.setColor(Color.yellow);
+    g.fillRect(x-Game.getPlayerX()+(Game.WIDTH/2-Game.SQUARE/2), y-Game.getPlayerY()+(Game.HEIGHT/2-Game.SQUARE/2), Game.SQUARE, Game.SQUARE);
   }
 }
