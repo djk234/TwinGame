@@ -3,19 +3,77 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.*;
+import java.io.File;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class Player extends GameObject {
 
   Handler handler;
   private boolean intersecting = false;
+  public static BufferedImage img;
+  public static BufferedImage img_walk_still;
+  public static BufferedImage img_walk_left;
+  public static BufferedImage img_walk_right;
+  public static int walk = 0;
 
   public Player(int x, int y, ID id, Handler handler) {
     super(x, y, id);
     this.handler = handler;
+    try{
+      this.img = ImageIO.read(new File("Images/p1/p1_front_still.png"));
+      this.img_walk_still = this.img;
+    }
+    catch(IOException ex){
+    }
+  }
+
+  public void setImg(String direction){
+    if (direction.equals("Up")){
+      try{
+        this.img = ImageIO.read(new File("Images/p1/p1_back_still.png"));
+        this.img_walk_still = this.img;
+        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_back_left.png"));
+        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_back_right.png"));
+      }
+      catch(IOException ex){
+      }
+    }
+    else if (direction.equals("Down")){
+      try{
+        this.img = ImageIO.read(new File("Images/p1/p1_front_still.png"));
+        this.img_walk_still = this.img;
+        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_front_left.png"));
+        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_front_right.png"));
+      }
+      catch(IOException ex){
+      }
+    }
+    else if (direction.equals("Right")){
+      try{
+        this.img = ImageIO.read(new File("Images/p1/p1_right_still.png"));
+        this.img_walk_still = this.img;
+        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_right_left.png"));
+        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_right_right.png"));
+      }
+      catch(IOException ex){
+      }
+    }
+    else if (direction.equals("Left")){
+      try{
+        this.img = ImageIO.read(new File("Images/p1/p1_left_still.png"));
+        this.img_walk_still = this.img;
+        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_left_left.png"));
+        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_left_right.png"));
+      }
+      catch(IOException ex){
+      }
+    }
   }
 
   public Rectangle getBounds(){
-    return new Rectangle(x,y,Game.SQUARE,Game.SQUARE);
+    return new Rectangle(x,y,20,Game.SQUARE);
   }
 
   public void tick() {
@@ -24,6 +82,22 @@ public class Player extends GameObject {
     collision();
     Game.setPlayerX(x);
     Game.setPlayerY(y);
+    if (KeyInput.checkWalking()) {
+      // Still
+      if ((walk%24 >= 0 && walk%24 < 6) || (walk%24 >= 12 && walk%24 < 18)){
+        this.img = this.img_walk_still;
+      }
+      else if (walk%24 >= 6 && walk%24 < 12) {
+        this.img = this.img_walk_left;
+      }
+      else if (walk%24 >= 18 && walk%24 <= 23) {
+        this.img = this.img_walk_right;
+      }
+    }
+    else {
+      this.img = this.img_walk_still;
+    }
+    walk++;
   }
 
   public NPC checkTalking(){
@@ -99,7 +173,7 @@ public class Player extends GameObject {
   public void render(Graphics g) {
     // Front Facing Still
     // Skin Color
-    g.setColor(Color.white);
-    g.fillRect(Game.STARTX,Game.STARTY,Game.SQUARE,Game.SQUARE);
+    g.drawImage(this.img,Game.STARTX,Game.STARTY,null);
+
   }
 }

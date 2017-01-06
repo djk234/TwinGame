@@ -45,10 +45,10 @@ public class WordBubble extends GameObject{
 
   public void render(Graphics g){
     g.setColor(Color.white);
-    g.fillRect(Game.SQUARE*2, Game.HEIGHT - 6*Game.SQUARE, Game.WIDTH - Game.SQUARE*4, Game.SQUARE*3);
+    g.fillRect(Game.SQUARE*2, Game.HEIGHT - 4*Game.SQUARE, Game.WIDTH - Game.SQUARE*4, Game.SQUARE*2);
     g.setColor(Color.black);
-    g.drawRect(Game.SQUARE*2, Game.HEIGHT - 6*Game.SQUARE, Game.WIDTH - Game.SQUARE*4, Game.SQUARE*3);
+    g.drawRect(Game.SQUARE*2, Game.HEIGHT - 4*Game.SQUARE, Game.WIDTH - Game.SQUARE*4, Game.SQUARE*2);
     g.setFont(Game.customfont);
-    g.drawString(conversation.get(phrase), Game.SQUARE*3,Game.HEIGHT - 4*Game.SQUARE);
+    g.drawString(conversation.get(phrase), Game.SQUARE*3,Game.HEIGHT - 3*Game.SQUARE+5);
   }
 }
