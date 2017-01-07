@@ -15,8 +15,9 @@ public class KeyInput extends KeyAdapter {
 
   public void keyPressed(KeyEvent e){
     int key = e.getKeyCode();
+    State state = Game.getState();
     // Go Up
-    if(key == 38 && !alreadyTalking){
+    if(key == 38 && !alreadyTalking && (state == State.Play)){
       this.walking = true;
       Game.getPlayer().setVelY(-2);
       Game.getPlayer().setImg("Up");
@@ -26,7 +27,7 @@ public class KeyInput extends KeyAdapter {
       }
     }
     // Go Down
-    else if(key == 40 && !alreadyTalking){
+    else if(key == 40 && !alreadyTalking && (state == State.Play)){
       this.walking = true;
       Game.getPlayer().setVelY(2);
       Game.getPlayer().setImg("Down");
@@ -36,7 +37,7 @@ public class KeyInput extends KeyAdapter {
       }
     }
     // Go Left
-    else if(key == 37 && !alreadyTalking){
+    else if(key == 37 && !alreadyTalking && (state == State.Play)){
       this.walking = true;
       Game.getPlayer().setVelX(-2);
       Game.getPlayer().setImg("Left");
@@ -46,7 +47,7 @@ public class KeyInput extends KeyAdapter {
       }
     }
     // Go Right
-    else if(key == 39 && !alreadyTalking){
+    else if(key == 39 && !alreadyTalking && (state == State.Play)){
       this.walking = true;
       Game.getPlayer().setVelX(2);
       Game.getPlayer().setImg("Right");
@@ -56,8 +57,17 @@ public class KeyInput extends KeyAdapter {
       }
     }
 
+    // Pause
+    else if(key == KeyEvent.VK_P){
+      if (state == State.Play){
+        Game.setState(State.Pause);
+      }
+      else {
+        Game.setState(State.Play);  
+      }
+    }
 
-    else if (key == KeyEvent.VK_ENTER) {
+    else if (key == KeyEvent.VK_ENTER && (state == State.Play)) {
       this.walking = false;
       NPC npc = Game.getPlayer().checkTalking();
       if (npc != null){

@@ -16,12 +16,13 @@ public class Game extends Canvas implements Runnable {
   public static Font customfont;
   public static Player player;
   public static ArrayList<NPC> npcs = new ArrayList<NPC>();
+  public static Pause pause;
   private Thread thread;
   private boolean running = false;
   private Handler handler;
   public ArrayList<ArrayList<String>> map;
   private HUD hud;
-  public State state;
+  public static State state;
   public static int currentTopRow = 0;
   public static int currentLeftCol = 0;
   public static int playerX = STARTX, playerY = STARTY;
@@ -30,9 +31,12 @@ public class Game extends Canvas implements Runnable {
     this.map = makeMap(text);
 
     handler = new Handler();
+    pause = new Pause(0,0,ID.Pause);
+
     this.addKeyListener(new KeyInput(handler));
 
     new Window(WIDTH, HEIGHT, "Twin Game", this);
+
     hud = new HUD();
     state = State.Play;
     int rows = HEIGHT / SQUARE;
@@ -67,6 +71,18 @@ public class Game extends Canvas implements Runnable {
     player = new Player(playerX, playerY, ID.Player, handler);
     handler.addObject(player);
 
+  }
+
+  public static Pause getPause(){
+    return pause;
+  }
+  
+  public static State getState(){
+    return state;
+  }
+
+  public static void setState(State s){
+    state = s;
   }
 
   public static Player getPlayer(){

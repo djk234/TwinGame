@@ -7,6 +7,7 @@ public enum ID {
   Grass1(),
   Grass2(),
   NPC(),
-  WordBubble();
+  WordBubble(),
+  Pause();
 
 }

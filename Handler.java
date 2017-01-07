@@ -19,19 +19,20 @@ public class Handler {
   }
 
   public void render(Graphics g){
-    for(int i = 0; i < object.size(); i++) {
-      GameObject tempObject = object.get(i);
-      int minWidth = Game.getPlayerX() - Game.WIDTH/2 - Game.SQUARE;
-      int maxWidth = Game.getPlayerX() + Game.WIDTH/2 + Game.SQUARE;
-      int minHeight = Game.getPlayerY() - Game.HEIGHT/2 - Game.SQUARE;
-      int maxHeight = Game.getPlayerY() + Game.HEIGHT/2 + Game.SQUARE;
-      if (tempObject.getId() == ID.WordBubble) {
-      }
-      if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
-        if (tempObject.getId() == ID.WordBubble) {
+    if (Game.getState() == State.Play){
+      for(int i = 0; i < object.size(); i++) {
+        GameObject tempObject = object.get(i);
+        int minWidth = Game.getPlayerX() - Game.WIDTH/2 - Game.SQUARE;
+        int maxWidth = Game.getPlayerX() + Game.WIDTH/2 + Game.SQUARE;
+        int minHeight = Game.getPlayerY() - Game.HEIGHT/2 - Game.SQUARE;
+        int maxHeight = Game.getPlayerY() + Game.HEIGHT/2 + Game.SQUARE;
+        if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
+          tempObject.render(g);
         }
-        tempObject.render(g);
       }
+    }
+    else {
+      Game.getPause().render(g);
     }
   }
 
