@@ -111,6 +111,17 @@ public class Player extends GameObject {
     return null;
   }
 
+  public Chest checkOpening(){
+    ArrayList<Chest> chests = Game.getChests();
+    for(int i = 0; i < chests.size(); i++) {
+      Chest tempChest = chests.get(i);
+      if (getBounds().intersects(tempChest.getOpenBounds())){
+        return tempChest;
+      }
+    }
+    return null;
+  }
+
   private void collision(){
     for(int i = 0; i < handler.object.size(); i++){
       GameObject tempObject = handler.object.get(i);
@@ -130,13 +141,13 @@ public class Player extends GameObject {
             intersecting = false;
           }
         }
-        else if(tempObject.getId() == ID.Obstacle){
+        else if(tempObject.getId() == ID.NPC || tempObject.getId() == ID.Obstacle ){
           if(getBounds().intersects(tempObject.getBounds())){
-            if (Math.abs((y - velY) - tempObject.getY()) < Game.SQUARE){
+            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
               x -= velX;
               velX = 0;
             }
-            else if (Math.abs((x-velX) - tempObject.getX()) < Game.SQUARE){
+            else if (Math.abs((x-velX) - tempObject.getX()%Game.WIDTH) < Game.SQUARE){
               y -= velY;
               velY = 0;
             }
@@ -148,9 +159,9 @@ public class Player extends GameObject {
             }
           }
         }
-        else if(tempObject.getId() == ID.NPC){
+        else if(tempObject.getId() == ID.Chest){
           if(getBounds().intersects(tempObject.getBounds())){
-            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
+            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE/2){
               x -= velX;
               velX = 0;
             }
@@ -171,9 +182,6 @@ public class Player extends GameObject {
   }
 
   public void render(Graphics g) {
-    // Front Facing Still
-    // Skin Color
     g.drawImage(this.img,Game.STARTX,Game.STARTY,null);
-
   }
 }

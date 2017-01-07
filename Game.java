@@ -16,6 +16,7 @@ public class Game extends Canvas implements Runnable {
   public static Font customfont;
   public static Player player;
   public static ArrayList<NPC> npcs = new ArrayList<NPC>();
+  public static ArrayList<Chest> chests = new ArrayList<Chest>();
   public static Pause pause;
   private Thread thread;
   private boolean running = false;
@@ -66,6 +67,11 @@ public class Game extends Canvas implements Runnable {
         }
         else {
         }
+        if (currentBlock.contains("Chest")){
+          Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest);
+          handler.addObject(newChest);
+          chests.add(newChest);
+        }
       }
     }
     player = new Player(playerX, playerY, ID.Player, handler);
@@ -76,7 +82,7 @@ public class Game extends Canvas implements Runnable {
   public static Pause getPause(){
     return pause;
   }
-  
+
   public static State getState(){
     return state;
   }
@@ -91,6 +97,10 @@ public class Game extends Canvas implements Runnable {
 
   public static ArrayList<NPC> getNPCS(){
     return npcs;
+  }
+
+  public static ArrayList<Chest> getChests(){
+    return chests;
   }
 
   public static int getPlayerX(){

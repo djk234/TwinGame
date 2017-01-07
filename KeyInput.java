@@ -63,13 +63,14 @@ public class KeyInput extends KeyAdapter {
         Game.setState(State.Pause);
       }
       else {
-        Game.setState(State.Play);  
+        Game.setState(State.Play);
       }
     }
 
     else if (key == KeyEvent.VK_ENTER && (state == State.Play)) {
       this.walking = false;
       NPC npc = Game.getPlayer().checkTalking();
+      Chest chest = Game.getPlayer().checkOpening();
       if (npc != null){
         if (alreadyTalking) {
           int startAgain = npc.bubble.nextPhrase();
@@ -82,6 +83,9 @@ public class KeyInput extends KeyAdapter {
           handler.addObject(npc.bubble);
           lastNPC = npc;
         }
+      }
+      if (chest != null){
+        System.out.println("Opening");
       }
     }
 
