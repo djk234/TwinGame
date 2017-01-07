@@ -16,8 +16,9 @@ public class KeyInput extends KeyAdapter {
   public void keyPressed(KeyEvent e){
     int key = e.getKeyCode();
     State state = Game.getState();
+    boolean opening = Game.getPlayer().getOpening();
     // Go Up
-    if(key == 38 && !alreadyTalking && (state == State.Play)){
+    if(key == 38 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
       Game.getPlayer().setVelY(-2);
       Game.getPlayer().setImg("Up");
@@ -27,7 +28,7 @@ public class KeyInput extends KeyAdapter {
       }
     }
     // Go Down
-    else if(key == 40 && !alreadyTalking && (state == State.Play)){
+    else if(key == 40 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
       Game.getPlayer().setVelY(2);
       Game.getPlayer().setImg("Down");
@@ -37,7 +38,7 @@ public class KeyInput extends KeyAdapter {
       }
     }
     // Go Left
-    else if(key == 37 && !alreadyTalking && (state == State.Play)){
+    else if(key == 37 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
       Game.getPlayer().setVelX(-2);
       Game.getPlayer().setImg("Left");
@@ -47,7 +48,7 @@ public class KeyInput extends KeyAdapter {
       }
     }
     // Go Right
-    else if(key == 39 && !alreadyTalking && (state == State.Play)){
+    else if(key == 39 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
       Game.getPlayer().setVelX(2);
       Game.getPlayer().setImg("Right");
@@ -84,8 +85,13 @@ public class KeyInput extends KeyAdapter {
           lastNPC = npc;
         }
       }
-      if (chest != null){
+      if (chest != null && !chest.getOpened()){
+        Game.getPlayer().setOpening(true);
+        chest.startOpening();
         System.out.println("Opening");
+      }
+      else if (chest != null && chest.getOpened()){
+        Game.getPlayer().setOpening(false);
       }
     }
 

@@ -12,6 +12,7 @@ public class Player extends GameObject {
 
   Handler handler;
   private boolean intersecting = false;
+  public boolean opening = false;
   public static BufferedImage img;
   public static BufferedImage img_walk_still;
   public static BufferedImage img_walk_left;
@@ -27,6 +28,14 @@ public class Player extends GameObject {
     }
     catch(IOException ex){
     }
+  }
+
+  public boolean getOpening(){
+    return opening;
+  }
+
+  public void setOpening(boolean opening){
+    this.opening = opening;
   }
 
   public void setImg(String direction){

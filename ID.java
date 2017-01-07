@@ -9,6 +9,8 @@ public enum ID {
   NPC(),
   WordBubble(),
   Pause(),
-  Chest();
+  Chest(),
+  Item(),
+  Sword1();
 
 }
