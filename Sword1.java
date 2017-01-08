@@ -22,7 +22,7 @@ public class Sword1 extends Item {
   public int count = -1;
 
   public Sword1(int x, int y, ID id, WordBubble bubble) {
-    super(x, y, id, bubble);
+    super(x, y, id, bubble);/*
     try{
       this.img0 = ImageIO.read(new File("Images/swords/sword1_0.png"));
     }
@@ -45,7 +45,7 @@ public class Sword1 extends Item {
     }
     try{
       this.img4 = ImageIO.read(new File("Images/swords/sword1_4.png"));
-    }
+    }*/
   }
 
   public void tick() {

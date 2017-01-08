@@ -7,12 +7,14 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 public class Player extends GameObject {
 
   Handler handler;
   private boolean intersecting = false;
   public boolean opening = false;
+  public static ArrayList<Item> inventory;
   public static BufferedImage img;
   public static BufferedImage img_walk_still;
   public static BufferedImage img_walk_left;
@@ -22,6 +24,7 @@ public class Player extends GameObject {
   public Player(int x, int y, ID id, Handler handler) {
     super(x, y, id);
     this.handler = handler;
+    this.inventory = new ArrayList<Item>();
     try{
       this.img = ImageIO.read(new File("Images/p1/p1_front_still.png"));
       this.img_walk_still = this.img;
