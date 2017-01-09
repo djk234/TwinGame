@@ -8,16 +8,27 @@ import javax.imageio.ImageIO;
 
 public abstract class Item {
 
+  Handler handler;
   protected int x, y;
+  protected int attack1, attack2;
+  protected String description;
   protected WordBubble bubble;
-  protected ID id;
-  protected ArrayList<ImageIO> images;
+  protected String name;
+  protected ArrayList<BufferedImage> images;
+  protected boolean shown = false;
+  protected int count = -1;
 
-  public Item(int x, int y, ID id, String name, WordBubble bubble){
+  public Item(int x, int y, String name, ArrayList<BufferedImage> images, WordBubble bubble, Handler handler){
     this.x = x;
     this.y = y;
-    this.id = id;
+    this.attack1 = attack1;
+    this.attack2 = attack2;
+    this.name = name;
     this.bubble = bubble;
+    this.images = images;
+    this.description = description;
+    this.handler = handler;
+    /*
     this.images = new ArrayList<ImageIO>();
     int numPics = new File("Images/item/"+name).listFiles().length;
     for(int i = 0; i < numPics; i++) {
@@ -26,7 +37,7 @@ public abstract class Item {
       }
       catch(IOException ex){
       }
-    }
+    }*/
   }
 
   public abstract void tick();
@@ -49,11 +60,39 @@ public abstract class Item {
     return y;
   }
 
-  public void setId(ID id){
-    this.id = id;
+  public int getAttack1(){
+    return attack1;
   }
 
-  public ID getId(){
-    return id;
+  public int getAttack2(){
+    return attack2;
+  }
+
+  public String getDescription(){
+    return description;
+  }
+
+  public ArrayList<BufferedImage> getPics(){
+    return images;
+  }
+
+  public boolean getShown(){
+    return shown;
+  }
+
+  public void setShown(boolean shown){
+    this.shown = shown;
+  }
+
+  public void startShowing(){
+    handler.addItem(this);
+    handler.addObject(bubble);
+    count = 0;
+  }
+
+  public void stopShowing(){
+    handler.removeItem(this);
+    shown = true;
+    count = -1;
   }
 }

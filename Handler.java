@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class Handler {
 
   LinkedList<GameObject> object = new LinkedList<GameObject>();
+  LinkedList<Item> item = new LinkedList<Item>();
 
   public void tick(){
     for(int i = 0; i < object.size(); i++) {
@@ -15,6 +16,10 @@ public class Handler {
       if (tempObject.getX() >= minWidth && tempObject.getX() <= maxWidth && tempObject.getY() >= minHeight && tempObject.getY() <= maxHeight || tempObject.getId() == ID.Player){
         tempObject.tick();
       }
+    }
+    for(int j = 0; j < item.size(); j++){
+      Item tempItem = item.get(j);
+      tempItem.tick();
     }
   }
 
@@ -30,6 +35,10 @@ public class Handler {
           tempObject.render(g);
         }
       }
+      for(int j = 0; j < item.size(); j++){
+        Item tempItem = item.get(j);
+        tempItem.render(g);
+      }
     }
     else {
       Game.getPause().render(g);
@@ -42,5 +51,13 @@ public class Handler {
 
   public void removeObject(GameObject object){
     this.object.remove(object);
+  }
+
+  public void addItem(Item item){
+    this.item.add(item);
+  }
+
+  public void removeItem(Item item){
+    this.item.remove(item);
   }
 }

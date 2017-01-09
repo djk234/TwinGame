@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.FontFormatException;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import java.util.*;
 import java.io.*;
 
@@ -68,9 +70,28 @@ public class Game extends Canvas implements Runnable {
         else {
         }
         if (currentBlock.contains("Chest")){
-          Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest);
-          handler.addObject(newChest);
-          chests.add(newChest);
+          if (currentBlock.contains("Sword1")){
+            ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+            for(int i = 0; i < 8; i++) {
+              try{
+                images.add(ImageIO.read(new File("Images/item/sword1/sword1_"+i+".png")));
+              }
+              catch(IOException ex){
+                System.out.println("fail");
+              }
+            }
+            System.out.println(images.size());
+            ArrayList<String> convo = new ArrayList<String>();
+            convo.add("YOU'VE FOUND THE NOVICE SWORD.");
+            convo.add("ITS SLIGHTLY DULL BLADE GLEAMS PLEASANTLY");
+            WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
+            Sword1 sword1 = new Sword1(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, sword1);
+            handler.addObject(newChest);
+            chests.add(newChest);
+          }
+          else {
+          }
         }
       }
     }

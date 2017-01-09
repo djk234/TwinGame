@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.util.*;
+import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -9,49 +9,47 @@ import javax.imageio.ImageIO;
 
 public class Sword1 extends Item {
 
-  public static BufferedImage img;
-  public static BufferedImage img0;
-  public static BufferedImage img1;
-  public static BufferedImage img2;
-  public static BufferedImage img3;
-  public static BufferedImage img4;
-  public static BufferedImage img5;
-  public static BufferedImage img6;
-  public static BufferedImage img7;
-  public static BufferedImage img8;
-  public int count = -1;
+  public int img_int = 0;
 
-  public Sword1(int x, int y, ID id, WordBubble bubble) {
-    super(x, y, id, bubble);/*
-    try{
-      this.img0 = ImageIO.read(new File("Images/swords/sword1_0.png"));
-    }
-    catch(IOException ex){
-    }
-    try{
-      this.img1 = ImageIO.read(new File("Images/swords/sword1_1.png"));
-    }
-    catch(IOException ex){
-    }
-    try{
-      this.img2 = ImageIO.read(new File("Images/swords/sword1_2.png"));
-    }
-    catch(IOException ex){
-    }
-    try{
-      this.img3 = ImageIO.read(new File("Images/swords/sword1_3.png"));
-    }
-    catch(IOException ex){
-    }
-    try{
-      this.img4 = ImageIO.read(new File("Images/swords/sword1_4.png"));
-    }*/
+  public Sword1(int x, int y, ArrayList<BufferedImage> images, WordBubble bubble, Handler handler) {
+    super(x, y, "Sword1", images, bubble, handler);
+    System.out.println(images.size());
   }
 
   public void tick() {
+    if (count < 0){
+
+    }
+    else {
+      if (count%48 < 6) {
+        img_int = 0;
+      }
+      else if (count%48 < 12){
+        img_int = 1;
+      }
+      else if (count%48 < 18){
+        img_int = 2;
+      }
+      else if (count%48 < 24){
+        img_int = 3;
+      }
+      else if (count%48 < 30){
+        img_int = 4;
+      }
+      else if (count%48 < 36){
+        img_int = 5;
+      }
+      else if (count%48 < 42){
+        img_int = 6;
+      }
+      else if (count%48 < 48){
+        img_int = 7;
+      }
+      count++;
+    }
   }
 
   public void render(Graphics g) {
-    g.drawImage(this.img,x-Game.getPlayerX()+(Game.WIDTH/2-Game.SQUARE/2), y-Game.getPlayerY()+(Game.HEIGHT/2-Game.SQUARE/2)+10,null);
+    g.drawImage(images.get(img_int),x-Game.getPlayerX()+(Game.WIDTH/2-Game.SQUARE/2), y-Game.getPlayerY()+(Game.HEIGHT/2-Game.SQUARE/2)-15,null);
   }
 }

@@ -21,9 +21,11 @@ public class Chest extends GameObject {
   public static BufferedImage img8;
   public int count = -1;
   public boolean opened = false;
+  public static Item item;
 
-  public Chest(int x, int y, ID id) {
+  public Chest(int x, int y, ID id, Item item) {
     super(x, y, id);
+    this.item = item;
     try{
       this.img0 = ImageIO.read(new File("Images/chest/chest_0.png"));
     }
@@ -80,6 +82,10 @@ public class Chest extends GameObject {
     return new Rectangle(x, y+Game.SQUARE/2, Game.SQUARE, Game.SQUARE/2+2);
   }
 
+  public static Item getItem(){
+    return item;
+  }
+
   public void startOpening(){
     this.count = 0;
   }
@@ -94,6 +100,9 @@ public class Chest extends GameObject {
     }
     else if (count == 54){
       opened = true;
+      System.out.println("Showing");
+      item.startShowing();
+      count = -1;
     }
     else {
       if (count%54 < 6) {
