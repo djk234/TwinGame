@@ -70,11 +70,11 @@ public class Game extends Canvas implements Runnable {
         else {
         }
         if (currentBlock.contains("Chest")){
-          if (currentBlock.contains("Sword1")){
+          if (currentBlock.contains("NoviceSword")){
             ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
             for(int i = 0; i < 8; i++) {
               try{
-                images.add(ImageIO.read(new File("Images/item/sword1/sword1_"+i+".png")));
+                images.add(ImageIO.read(new File("Images/item/novicesword/novicesword_"+i+".png")));
               }
               catch(IOException ex){
                 System.out.println("fail");
@@ -85,8 +85,8 @@ public class Game extends Canvas implements Runnable {
             convo.add("YOU'VE FOUND THE NOVICE SWORD.");
             convo.add("ITS SLIGHTLY DULL BLADE GLEAMS PLEASANTLY");
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
-            Sword1 sword1 = new Sword1(c*SQUARE, r*SQUARE, images, bubble, handler);
-            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, sword1);
+            NoviceSword novicesword = new NoviceSword(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, novicesword);
             handler.addObject(newChest);
             chests.add(newChest);
           }

@@ -85,7 +85,7 @@ public class KeyInput extends KeyAdapter {
           lastNPC = npc;
         }
       }
-      if (chest != null && !chest.getOpened()){
+      if (chest != null && !chest.getOpened() && !opening){
         Game.getPlayer().setOpening(true);
         chest.startOpening();
         System.out.println("Opening");
