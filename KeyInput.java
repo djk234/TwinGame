@@ -88,12 +88,11 @@ public class KeyInput extends KeyAdapter {
       if (chest != null && !chest.getOpened() && !opening){
         Game.getPlayer().setOpening(true);
         chest.startOpening();
-        System.out.println("Opening");
       }
       else if (chest != null && chest.getOpened() && !chest.getItem().getShown()){
         int startAgain = chest.getItem().bubble.nextPhrase();
         if (startAgain == 0) {
-          System.out.println("Stopping");
+          Game.getPlayer().addItem(chest.getItem());
           chest.getItem().stopShowing();
           Game.getPlayer().setOpening(false);
         }

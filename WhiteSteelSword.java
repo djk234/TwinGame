@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class NoviceSword extends Item {
+public class WhiteSteelSword extends Item {
 
   public int img_int = 0;
 
-  public NoviceSword(int x, int y, ArrayList<BufferedImage> images, WordBubble bubble, Handler handler) {
-    super(x, y, "NoviceSword", images, bubble, handler);
+  public WhiteSteelSword(int x, int y, ArrayList<BufferedImage> images, WordBubble bubble, Handler handler) {
+    super(x, y, "WhiteSteelSword", images, bubble, handler);
   }
 
   public void tick() {

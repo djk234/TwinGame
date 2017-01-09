@@ -19,6 +19,7 @@ public class Pause extends GameObject{
   }
 
   public void render(Graphics g){
+    ArrayList<Item> inventory = Game.getPlayer().getInventory();
     g.setColor(Color.black);
     g.fillRect(Game.SQUARE*2, Game.SQUARE*2, Game.WIDTH - Game.SQUARE*4, Game.HEIGHT - Game.SQUARE*4);
     g.setColor(Color.white);
@@ -29,5 +30,11 @@ public class Pause extends GameObject{
     g.drawRect(Game.WIDTH/2-Game.SQUARE*2, Game.SQUARE, Game.SQUARE*4, Game.SQUARE*2);
     g.setFont(Game.customfont);
     g.drawString("PAUSE", Game.WIDTH/2-Game.SQUARE+3, Game.SQUARE*2+5);
+    int item_x = Game.SQUARE*3;
+    int item_y = Game.SQUARE*3;
+    for (int i = 0; i < inventory.size(); i++){
+      g.drawString(inventory.get(i).name,item_x,item_y);
+      item_y += Game.SQUARE;
+    }
   }
 }

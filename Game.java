@@ -77,27 +77,43 @@ public class Game extends Canvas implements Runnable {
                 images.add(ImageIO.read(new File("Images/item/novicesword/novicesword_"+i+".png")));
               }
               catch(IOException ex){
-                System.out.println("fail");
+                System.out.println("failn");
               }
             }
-            System.out.println(images.size());
             ArrayList<String> convo = new ArrayList<String>();
             convo.add("YOU'VE FOUND THE NOVICE SWORD.");
             convo.add("ITS SLIGHTLY DULL BLADE GLEAMS PLEASANTLY");
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             NoviceSword novicesword = new NoviceSword(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, novicesword);
-            handler.addObject(newChest);
             chests.add(newChest);
+            handler.addObject(newChest);
           }
-          else {
+          else if (currentBlock.contains("WhiteSteelSword")){
+            ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+            for(int i = 0; i < 8; i++) {
+              try{
+                images.add(ImageIO.read(new File("Images/item/whitesteelsword/whitesteelsword_"+i+".png")));
+              }
+              catch(IOException ex){
+                System.out.println("failw");
+              }
+            }
+            ArrayList<String> convo = new ArrayList<String>();
+            convo.add("YOU'VE FOUND THE WHITE STEEL SWORD.");
+            convo.add("THE BLADE'S SHINE SHOWS");
+            convo.add("THE CRAFTSMANSHIP OF THIS WEAPON");
+            WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
+            WhiteSteelSword whitesteelsword = new WhiteSteelSword(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, whitesteelsword);
+            chests.add(newChest);
+            handler.addObject(newChest);
           }
         }
       }
     }
     player = new Player(playerX, playerY, ID.Player, handler);
     handler.addObject(player);
-
   }
 
   public static Pause getPause(){

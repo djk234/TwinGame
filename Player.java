@@ -14,7 +14,7 @@ public class Player extends GameObject {
   Handler handler;
   private boolean intersecting = false;
   public boolean opening = false;
-  public static ArrayList<Item> inventory;
+  public ArrayList<Item> inventory;
   public static BufferedImage img;
   public static BufferedImage img_walk_still;
   public static BufferedImage img_walk_left;
@@ -33,6 +33,14 @@ public class Player extends GameObject {
     }
   }
 
+  public void addItem(Item item){
+    this.inventory.add(item);
+  }
+
+  public ArrayList<Item> getInventory(){
+    return inventory;
+  }
+  
   public boolean getOpening(){
     return opening;
   }
