@@ -77,7 +77,6 @@ public class Game extends Canvas implements Runnable {
                 images.add(ImageIO.read(new File("Images/item/novicesword/novicesword_"+i+".png")));
               }
               catch(IOException ex){
-                System.out.println("failn");
               }
             }
             ArrayList<String> convo = new ArrayList<String>();
@@ -96,16 +95,34 @@ public class Game extends Canvas implements Runnable {
                 images.add(ImageIO.read(new File("Images/item/whitesteelsword/whitesteelsword_"+i+".png")));
               }
               catch(IOException ex){
-                System.out.println("failw");
               }
             }
             ArrayList<String> convo = new ArrayList<String>();
             convo.add("YOU'VE FOUND THE WHITE STEEL SWORD.");
-            convo.add("THE BLADE'S SHINE SHOWS");
-            convo.add("THE CRAFTSMANSHIP OF THIS WEAPON");
+            convo.add("THE BLADE'S SHINE SHOWS...");
+            convo.add("...THE CRAFTSMANSHIP OF THIS WEAPON");
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             WhiteSteelSword whitesteelsword = new WhiteSteelSword(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, whitesteelsword);
+            chests.add(newChest);
+            handler.addObject(newChest);
+          }
+          else if (currentBlock.contains("SwordOfEternalLight")){
+            ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+            for(int i = 0; i < 8; i++) {
+              try{
+                images.add(ImageIO.read(new File("Images/item/swordofeternallight/swordofeternallight_"+i+".png")));
+              }
+              catch(IOException ex){
+              }
+            }
+            ArrayList<String> convo = new ArrayList<String>();
+            convo.add("YOU'VE FOUND THE SWORD OF ETERNAL LIGHT!");
+            convo.add("ITS BLADE GLOWS HOT...");
+            convo.add("...WITH THE DESIRE TO VANQUISH EVIL");
+            WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
+            SwordOfEternalLight swordofeternallight = new SwordOfEternalLight(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, swordofeternallight);
             chests.add(newChest);
             handler.addObject(newChest);
           }

@@ -1,5 +1,5 @@
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
-Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,NPC<HELLO>MY NAME IS DAVID,Grass1,Grass1+Chest:NoviceSword,Grass1,Grass1+Chest:WhiteSteelSword,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
+Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,NPC<HELLO>MY NAME IS DAVID,Grass1,Grass1+Chest:NoviceSword,Grass1,Grass1+Chest:WhiteSteelSword,Grass1,Grass1+Chest:SwordOfEternalLight,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
