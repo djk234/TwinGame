@@ -4,7 +4,7 @@ Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Gra
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
-Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
+Grass1,Grass1,Grass1,Grass1,Grass1+Chest:RoundShield,Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]
 Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Obstacle,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1,Grass1]

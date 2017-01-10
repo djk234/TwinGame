@@ -49,7 +49,7 @@ public class KeyInput extends KeyAdapter {
     }
 
     else if(key == 37 && state == State.Pause){
-      Pause.decSelectedItem(1);
+      Pause.decSelectedItem();
     }
 
     // Go Right
@@ -64,7 +64,7 @@ public class KeyInput extends KeyAdapter {
     }
 
     else if(key == 39 && state == State.Pause){
-      Pause.incSelectedItem(1);
+      Pause.incSelectedItem();
     }
 
     // Pause

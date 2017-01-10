@@ -126,6 +126,24 @@ public class Game extends Canvas implements Runnable {
             chests.add(newChest);
             handler.addObject(newChest);
           }
+          else if (currentBlock.contains("RoundShield")){
+            ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+            for(int i = 0; i < 8; i++) {
+              try{
+                images.add(ImageIO.read(new File("Images/item/roundshield/roundshield_"+i+".png")));
+              }
+              catch(IOException ex){
+              }
+            }
+            ArrayList<String> convo = new ArrayList<String>();
+            convo.add("YOU'VE FOUND A ROUND SHIELD");
+            convo.add("LOOKS LIKE IT WILL HELP BLOCK ATTACKS");
+            WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
+            RoundShield roundshield = new RoundShield(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, roundshield);
+            chests.add(newChest);
+            handler.addObject(newChest);
+          }
         }
       }
     }
