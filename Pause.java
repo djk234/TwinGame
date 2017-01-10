@@ -11,6 +11,7 @@ import java.util.*;
 public class Pause extends GameObject{
 
   ArrayList<BufferedImage> images;
+  public static int selectedItem = 0;
 
   public Pause(int x, int y, ID id) {
     super(x, y, id);
@@ -29,6 +30,23 @@ public class Pause extends GameObject{
       images.add(ImageIO.read(new File("Images/item/swordofeternallight/swordofeternallight.png")));
     }
     catch(IOException ex){
+    }
+  }
+
+  public static void setSelectedItem(int s){
+    selectedItem = s;
+  }
+
+  public static void incSelectedItem(int amount){
+    ArrayList<Item> inventory = Game.getPlayer().getInventory();
+    if ((selectedItem + amount < inventory.size())){
+      selectedItem += amount;
+    }
+  }
+
+  public static void decSelectedItem(int amount){
+    if ((selectedItem - amount >= 0)){
+      selectedItem -= amount;
     }
   }
 
@@ -57,12 +75,30 @@ public class Pause extends GameObject{
     for (int i = 0; i < inventory.size(); i++){
       if (inventory.get(i).name.contains("NoviceSword")){
         g.drawImage(images.get(0),Game.SQUARE*2+filler,Game.SQUARE*4+10,null);
+        if (selectedItem == 0){
+          int thickness = 5;
+          for (int j = 1; j < thickness; j++) {
+            g.drawRect(Game.SQUARE*2+filler+j,Game.SQUARE*4+j,Game.SQUARE*4-(j)*2,Game.SQUARE*4-(j)*2);
+          }
+        }
       }
       else if (inventory.get(i).name.contains("WhiteSteelSword")){
         g.drawImage(images.get(1),Game.SQUARE*6+filler*2,Game.SQUARE*4+10,null);
+        if (selectedItem == 1){
+          int thickness = 5;
+          for (int j = 1; j < thickness; j++) {
+            g.drawRect(Game.SQUARE*6+filler*2+j,Game.SQUARE*4+j,Game.SQUARE*4-(j)*2,Game.SQUARE*4-(j)*2);
+          }
+        }
       }
       else if (inventory.get(i).name.contains("SwordOfEternalLight")){
         g.drawImage(images.get(2),Game.SQUARE*10+filler*3,Game.SQUARE*4+10,null);
+        if (selectedItem == 2){
+          int thickness = 5;
+          for (int j = 1; j < thickness; j++) {
+            g.drawRect(Game.SQUARE*10+filler*3+j,Game.SQUARE*4+j,Game.SQUARE*4-(j)*2,Game.SQUARE*4-(j)*2);
+          }
+        }
      }
     }
     g.setFont(Game.customfont);

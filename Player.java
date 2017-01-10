@@ -35,12 +35,21 @@ public class Player extends GameObject {
 
   public void addItem(Item item){
     this.inventory.add(item);
+    if (item.name.contains("NoviceSword") && this.inventory.size() == 1){
+      Pause.setSelectedItem(0);
+    }
+    else if (item.name.contains("WhiteSteelSword") && this.inventory.size() == 1){
+      Pause.setSelectedItem(1);
+    }
+    else if (item.name.contains("SwordOfEternalLight") && this.inventory.size() == 1){
+      Pause.setSelectedItem(2);
+    }
   }
 
   public ArrayList<Item> getInventory(){
     return inventory;
   }
-  
+
   public boolean getOpening(){
     return opening;
   }

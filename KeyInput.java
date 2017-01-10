@@ -47,6 +47,11 @@ public class KeyInput extends KeyAdapter {
         lastNPC = null;
       }
     }
+
+    else if(key == 37 && state == State.Pause){
+      Pause.decSelectedItem(1);
+    }
+
     // Go Right
     else if(key == 39 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
@@ -56,6 +61,10 @@ public class KeyInput extends KeyAdapter {
         handler.removeObject(lastNPC.bubble);
         lastNPC = null;
       }
+    }
+
+    else if(key == 39 && state == State.Pause){
+      Pause.incSelectedItem(1);
     }
 
     // Pause
