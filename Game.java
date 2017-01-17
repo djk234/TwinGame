@@ -144,6 +144,44 @@ public class Game extends Canvas implements Runnable {
             chests.add(newChest);
             handler.addObject(newChest);
           }
+          else if (currentBlock.contains("StarShield")){
+            ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+            for(int i = 0; i < 8; i++) {
+              try{
+                images.add(ImageIO.read(new File("Images/item/starshield/starshield_"+i+".png")));
+              }
+              catch(IOException ex){
+              }
+            }
+            ArrayList<String> convo = new ArrayList<String>();
+            convo.add("YOU'VE FOUND THE STAR SHIELD");
+            convo.add("WITH A MUCH HIGHER DEFENSE AND LIGHTER WEIGHT...");
+            convo.add("WALK FASTER WITH IT AND BLOCK MORE ATTACKS.");
+            WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
+            StarShield starshield = new StarShield(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, starshield);
+            chests.add(newChest);
+            handler.addObject(newChest);
+          }
+          else if (currentBlock.contains("ClearGlassShield")){
+            ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+            for(int i = 0; i < 8; i++) {
+              try{
+                images.add(ImageIO.read(new File("Images/item/clearglassshield/clearglassshield_"+i+".png")));
+              }
+              catch(IOException ex){
+              }
+            }
+            ArrayList<String> convo = new ArrayList<String>();
+            convo.add("YOU'VE FOUND THE CLEAR GLASS SHIELD!");
+            convo.add("DEFLECT ATTACKS WITH INCREDIBLE POWER...");
+            convo.add("PROJECTILES WILL BE REFLECTED AS WELL!");
+            WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
+            ClearGlassShield clearglassshield = new ClearGlassShield(c*SQUARE, r*SQUARE, images, bubble, handler);
+            Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, clearglassshield);
+            chests.add(newChest);
+            handler.addObject(newChest);
+          }
         }
       }
     }

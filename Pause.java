@@ -38,6 +38,16 @@ public class Pause extends GameObject{
     }
     catch(IOException ex){
     }
+    try{
+      images.add(ImageIO.read(new File("Images/item/starshield/starshield.png")));
+    }
+    catch(IOException ex){
+    }
+    try{
+      images.add(ImageIO.read(new File("Images/item/clearglassshield/clearglassshield.png")));
+    }
+    catch(IOException ex){
+    }
   }
 
   public static void incSelectedItem(){
@@ -121,6 +131,12 @@ public class Pause extends GameObject{
       for (int i = 0; i < inventory.size(); i++){
         if (inventory.get(i).name.contains("RoundShield")){
           g.drawImage(images.get(3),Game.SQUARE*2+filler,Game.SQUARE*6,null);
+        }
+        else if (inventory.get(i).name.contains("StarShield")){
+          g.drawImage(images.get(4),Game.SQUARE*6+filler*2,Game.SQUARE*6+3,null);
+        }
+        else if (inventory.get(i).name.contains("ClearGlassShield")){
+          g.drawImage(images.get(5),Game.SQUARE*10+filler*3,Game.SQUARE*6+3,null);
         }
       }
     }

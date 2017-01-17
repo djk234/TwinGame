@@ -203,5 +203,10 @@ public class Player extends GameObject {
 
   public void render(Graphics g) {
     g.drawImage(this.img,Game.STARTX,Game.STARTY,null);
+    g.setColor(new Color(70, 70, 70, 100));
+    g.fillRect(Game.STARTX+6,Game.STARTY+27,10,1);
+    g.fillRect(Game.STARTX+4,Game.STARTY+28,13,1);
+    g.fillRect(Game.STARTX+4,Game.STARTY+29,13,1);
+    g.fillRect(Game.STARTX+6,Game.STARTY+30,10,1);
   }
 }
