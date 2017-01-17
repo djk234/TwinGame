@@ -15,10 +15,11 @@ public class Game extends Canvas implements Runnable {
 
   public static final int WIDTH = 720, HEIGHT = WIDTH / 12 * 9, SQUARE = 32;
   public static final int STARTX = WIDTH/2-SQUARE/2, STARTY = HEIGHT/2-SQUARE/2;
-  public static Font customfont;
-  public static Player player;
+  public static final int SCREENCOLS = WIDTH/SQUARE, SCREENROWS = HEIGHT/SQUARE;
   public static ArrayList<NPC> npcs = new ArrayList<NPC>();
   public static ArrayList<Chest> chests = new ArrayList<Chest>();
+  public static Font customfont;
+  public static Player player;
   public static Pause pause;
   private Thread thread;
   private boolean running = false;
@@ -26,14 +27,13 @@ public class Game extends Canvas implements Runnable {
   public ArrayList<ArrayList<String>> map;
   private HUD hud;
   public static State state;
-  public static int currentTopRow = 0;
-  public static int currentLeftCol = 0;
   public static int playerX = STARTX, playerY = STARTY;
 
   public Game(String text){
-    this.map = makeMap(text);
-
     handler = new Handler();
+    player = new Player(playerX, playerY, ID.Player, handler);
+    
+    this.map = makeMap(text);
     pause = new Pause(0,0,ID.Pause);
 
     this.addKeyListener(new KeyInput(handler));
@@ -42,29 +42,33 @@ public class Game extends Canvas implements Runnable {
 
     hud = new HUD();
     state = State.Play;
-    int rows = HEIGHT / SQUARE;
-    int cols = WIDTH / SQUARE;
     int numRows = map.size();
     for(int r = 0; r < numRows; r++){
       ArrayList<String> currentRow = map.get(r);
+      ArrayList<GameObject> newRow = new ArrayList<GameObject>();
+      ArrayList<Chest> newChestRow = new ArrayList<Chest>();
+      ArrayList<NPC> newNPCRow = new ArrayList<NPC>();
       int numCols = currentRow.size();
       for(int c = 0; c < numCols; c++){
+        newRow.add(null);
+        newChestRow.add(null);
+        newNPCRow.add(null);
         String currentBlock = currentRow.get(c);
         if(currentBlock.contains("Obstacle")){
-          handler.addObject(new Obstacle(c*SQUARE, r*SQUARE, ID.Obstacle));
+          newRow.set(c, new Obstacle(c*SQUARE, r*SQUARE, ID.Obstacle));
         }
         else if (currentBlock.contains("Grass1")){
-          handler.addObject(new Grass1(c*SQUARE, r*SQUARE, ID.Grass1));
+          newRow.set(c, new Grass1(c*SQUARE, r*SQUARE, ID.Grass1));
         }
         else if (currentBlock.contains("Grass2")){
-          handler.addObject(new Grass2(c*SQUARE, r*SQUARE, ID.Grass2));
+          newRow.set(c, new Grass2(c*SQUARE, r*SQUARE, ID.Grass2));
         }
         else if (currentBlock.contains("NPC")){
           ArrayList<String> fullobject = new ArrayList<String>(Arrays.asList(currentBlock.split("<")));
           ArrayList<String> convo = new ArrayList<String>(Arrays.asList(fullobject.get(1).split(">")));
           WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
           NPC newNPC = new NPC(c*SQUARE, r*SQUARE, ID.NPC, bubble);
-          handler.addObject(newNPC);
+          newNPCRow.set(c, newNPC);
           npcs.add(newNPC);
         }
         else {
@@ -85,8 +89,8 @@ public class Game extends Canvas implements Runnable {
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             NoviceSword novicesword = new NoviceSword(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, novicesword);
+            newChestRow.set(c, newChest);
             chests.add(newChest);
-            handler.addObject(newChest);
           }
           else if (currentBlock.contains("WhiteSteelSword")){
             ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -104,8 +108,8 @@ public class Game extends Canvas implements Runnable {
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             WhiteSteelSword whitesteelsword = new WhiteSteelSword(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, whitesteelsword);
+            newChestRow.set(c, newChest);
             chests.add(newChest);
-            handler.addObject(newChest);
           }
           else if (currentBlock.contains("SwordOfEternalLight")){
             ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -123,8 +127,8 @@ public class Game extends Canvas implements Runnable {
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             SwordOfEternalLight swordofeternallight = new SwordOfEternalLight(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, swordofeternallight);
+            newChestRow.set(c, newChest);
             chests.add(newChest);
-            handler.addObject(newChest);
           }
           else if (currentBlock.contains("RoundShield")){
             ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -141,8 +145,8 @@ public class Game extends Canvas implements Runnable {
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             RoundShield roundshield = new RoundShield(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, roundshield);
+            newChestRow.set(c, newChest);
             chests.add(newChest);
-            handler.addObject(newChest);
           }
           else if (currentBlock.contains("StarShield")){
             ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -160,8 +164,8 @@ public class Game extends Canvas implements Runnable {
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             StarShield starshield = new StarShield(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, starshield);
+            newChestRow.set(c, newChest);
             chests.add(newChest);
-            handler.addObject(newChest);
           }
           else if (currentBlock.contains("ClearGlassShield")){
             ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
@@ -175,18 +179,19 @@ public class Game extends Canvas implements Runnable {
             ArrayList<String> convo = new ArrayList<String>();
             convo.add("YOU'VE FOUND THE CLEAR GLASS SHIELD!");
             convo.add("DEFLECT ATTACKS WITH INCREDIBLE POWER...");
-            convo.add("PROJECTILES WILL BE REFLECTED AS WELL!");
+            convo.add("PROJECTILES WILL BE REFLECG");
             WordBubble bubble = new WordBubble(c*SQUARE, r*SQUARE, ID.WordBubble, handler, convo);
             ClearGlassShield clearglassshield = new ClearGlassShield(c*SQUARE, r*SQUARE, images, bubble, handler);
             Chest newChest = new Chest(c*SQUARE, r*SQUARE, ID.Chest, clearglassshield);
+            newChestRow.set(c, newChest);
             chests.add(newChest);
-            handler.addObject(newChest);
           }
         }
       }
+      handler.object.add(newRow);
+      handler.chests.add(newChestRow);
+      handler.npcs.add(newNPCRow);
     }
-    player = new Player(playerX, playerY, ID.Player, handler);
-    handler.addObject(player);
   }
 
   public static Pause getPause(){
@@ -257,17 +262,26 @@ public class Game extends Canvas implements Runnable {
       long now = System.nanoTime();
       delta += (now - lastTime) / ns;
       lastTime = now;
+      double delta_tick = 0;
+      long tick_start = System.nanoTime();
       while(delta >= 1) {
         tick();
         delta--;
       }
-      if(running)
+      long tick_stop = System.nanoTime();
+      delta_tick = (tick_stop - tick_start)/ns;
+      double delta_render = 0;
+      if(running){
+        long render_start = System.nanoTime();
         render();
+        long render_stop = System.nanoTime();
+        delta_render = (render_stop - render_start)/ns;
+      }
       frames++;
 
       if(System.currentTimeMillis() - timer > 1000){
         timer += 1000;
-        System.out.println("FPS: " + frames);
+        System.out.println("FPS: " + frames+" Tick: "+ delta_tick+ " Render: "+delta_render);
         frames = 0;
       }
     }
@@ -282,7 +296,7 @@ public class Game extends Canvas implements Runnable {
   private void render(){
     BufferStrategy bs = this.getBufferStrategy();
     if(bs == null){
-      this.createBufferStrategy(2);
+      this.createBufferStrategy(3);
       return;
     }
 

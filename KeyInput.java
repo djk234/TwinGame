@@ -23,7 +23,7 @@ public class KeyInput extends KeyAdapter {
       Game.getPlayer().setVelY(-2);
       Game.getPlayer().setImg("Up");
       if(lastNPC != null && Game.getPlayer().checkTalking() == null){
-        handler.removeObject(lastNPC.bubble);
+        handler.removeBubble();
         lastNPC = null;
       }
     }
@@ -33,7 +33,7 @@ public class KeyInput extends KeyAdapter {
       Game.getPlayer().setVelY(2);
       Game.getPlayer().setImg("Down");
       if(lastNPC != null && Game.getPlayer().checkTalking() == null){
-        handler.removeObject(lastNPC.bubble);
+        handler.removeBubble();
         lastNPC = null;
       }
     }
@@ -43,7 +43,7 @@ public class KeyInput extends KeyAdapter {
       Game.getPlayer().setVelX(-2);
       Game.getPlayer().setImg("Left");
       if(lastNPC != null && Game.getPlayer().checkTalking() == null){
-        handler.removeObject(lastNPC.bubble);
+        handler.removeBubble();
         lastNPC = null;
       }
     }
@@ -58,7 +58,7 @@ public class KeyInput extends KeyAdapter {
       Game.getPlayer().setVelX(2);
       Game.getPlayer().setImg("Right");
       if(lastNPC != null && Game.getPlayer().checkTalking() == null){
-        handler.removeObject(lastNPC.bubble);
+        handler.removeBubble();
         lastNPC = null;
       }
     }
@@ -90,7 +90,7 @@ public class KeyInput extends KeyAdapter {
         }
         else {
           alreadyTalking = true;
-          handler.addObject(npc.bubble);
+          handler.addBubble(npc.bubble);
           lastNPC = npc;
         }
       }
@@ -118,31 +118,25 @@ public class KeyInput extends KeyAdapter {
 
   public void keyReleased(KeyEvent e){
     int key = e.getKeyCode();
-    for(int i = 0; i < handler.object.size(); i++) {
-      GameObject tempObject = handler.object.get(i);
-
-      if(tempObject.getId() == ID.Player){
-        // Go Up
-        if(key == 38) {
-          this.walking = false;
-          tempObject.setVelY(0);
-        }
-        // Go Down
-        else if(key == 40) {
-          this.walking = false;
-          tempObject.setVelY(0);
-        }
-        // Go Left
-        else if(key == 37) {
-          this.walking = false;
-          tempObject.setVelX(0);
-        }
-        // Go Right
-        else if(key == 39) {
-          this.walking = false;
-          tempObject.setVelX(0);
-        }
-      }
+    // Go Up
+    if(key == 38) {
+      this.walking = false;
+      Game.getPlayer().setVelY(0);
+    }
+    // Go Down
+    else if(key == 40) {
+      this.walking = false;
+      Game.getPlayer().setVelY(0);
+    }
+    // Go Left
+    else if(key == 37) {
+      this.walking = false;
+      Game.getPlayer().setVelX(0);
+    }
+    // Go Right
+    else if(key == 39) {
+      this.walking = false;
+      Game.getPlayer().setVelX(0);
     }
   }
 }

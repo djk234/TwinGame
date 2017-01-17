@@ -143,49 +143,80 @@ public class Player extends GameObject {
   }
 
   private void collision(){
-    for(int i = 0; i < handler.object.size(); i++){
-      GameObject tempObject = handler.object.get(i);
-      int minWidth = Game.getPlayerX() - Game.WIDTH/2 - Game.SQUARE;
-      int maxWidth = Game.getPlayerX() + Game.WIDTH/2 + Game.SQUARE;
-      int minHeight = Game.getPlayerY() - Game.HEIGHT/2 - Game.SQUARE;
-      int maxHeight = Game.getPlayerY() + Game.HEIGHT/2 + Game.SQUARE;
-      if (tempObject.getX() >= minWidth && tempObject.getX() < maxWidth && tempObject.getY() >= minHeight && tempObject.getY() < maxHeight){
-        if(tempObject.getId() == ID.BasicEnemy){
-          if(getBounds().intersects(tempObject.getBounds())){
-            if(!intersecting){
-              intersecting = true;
-              HUD.HEALTH -= 2;
-            }
-          }
-          else {
-            intersecting = false;
-          }
-        }
-        else if(tempObject.getId() == ID.NPC || tempObject.getId() == ID.Obstacle ){
-          if(getBounds().intersects(tempObject.getBounds())){
-            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
-              x -= velX;
-              velX = 0;
-            }
-            else if (Math.abs((x-velX) - tempObject.getX()%Game.WIDTH) < Game.SQUARE){
-              y -= velY;
-              velY = 0;
+    int startY = (y/Game.SQUARE - Game.SCREENROWS/2);
+    int endY = (y/Game.SQUARE + Game.SCREENROWS/2+2);
+    if (startY < 0) startY = 0;
+    if (endY > handler.object.size()) endY = handler.object.size();
+    for(int i = startY; i < endY; i++) {
+      ArrayList<GameObject> tempRow = handler.object.get(i);
+      ArrayList<Chest> tempChests = handler.chests.get(i);
+      ArrayList<NPC> tempNPCS = handler.npcs.get(i);
+      int startX = (x/Game.SQUARE - Game.SCREENCOLS/2);
+      int endX = (x/Game.SQUARE + Game.SCREENCOLS/2+2);
+      if (startX < 0) startX = 0;
+      if (endX > tempRow.size()) endX = tempRow.size();
+      for(int j = startX; j < endX; j++){
+        GameObject tempObject = tempRow.get(j);
+        Chest tempChest = tempChests.get(j);
+        NPC tempNPC = tempNPCS.get(j);
+        if (tempObject != null){
+          if(tempObject.getId() == ID.BasicEnemy){
+            if(getBounds().intersects(tempObject.getBounds())){
+              if(!intersecting){
+                intersecting = true;
+                HUD.HEALTH -= 2;
+              }
             }
             else {
-              x -= velX;
-              y -= velY;
-              velX = 0;
-              velY = 0;
+              intersecting = false;
+            }
+          }
+          else if(tempObject.getId() == ID.Obstacle){
+            if(getBounds().intersects(tempObject.getBounds())){
+              if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE){
+                x -= velX;
+                velX = 0;
+              }
+              else if (Math.abs((x-velX) - tempObject.getX()%Game.WIDTH) < Game.SQUARE){
+                y -= velY;
+                velY = 0;
+              }
+              else {
+                x -= velX;
+                y -= velY;
+                velX = 0;
+                velY = 0;
+              }
             }
           }
         }
-        else if(tempObject.getId() == ID.Chest){
-          if(getBounds().intersects(tempObject.getBounds())){
-            if (Math.abs((y - velY) - tempObject.getY()%Game.HEIGHT) < Game.SQUARE/2){
+        if (tempNPC != null){
+          if(tempNPC.getId() == ID.NPC){
+            if(getBounds().intersects(tempNPC.getBounds())){
+              if (Math.abs((y - velY) - tempNPC.getY()%Game.HEIGHT) < Game.SQUARE){
+                x -= velX;
+                velX = 0;
+              }
+              else if (Math.abs((x-velX) - tempNPC.getX()%Game.WIDTH) < Game.SQUARE){
+                y -= velY;
+                velY = 0;
+              }
+              else {
+                x -= velX;
+                y -= velY;
+                velX = 0;
+                velY = 0;
+              }
+            }
+          }
+        }
+        if (tempChest != null){
+          if(getBounds().intersects(tempChest.getBounds())){
+            if (Math.abs((y - velY) - tempChest.getY()%Game.HEIGHT) < Game.SQUARE/2){
               x -= velX;
               velX = 0;
             }
-            else if (Math.abs((x-velX) - tempObject.getX()%Game.WIDTH) < Game.SQUARE){
+            else if (Math.abs((x-velX) - tempChest.getX()%Game.WIDTH) < Game.SQUARE){
               y -= velY;
               velY = 0;
             }

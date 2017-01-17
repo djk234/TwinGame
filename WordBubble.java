@@ -29,7 +29,7 @@ public class WordBubble extends GameObject{
       phrase++;
     }
     else {
-      handler.removeObject(this);
+      handler.removeBubble();
       phrase = 0;
     }
     return phrase;

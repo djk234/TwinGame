@@ -86,7 +86,7 @@ public abstract class Item {
 
   public void startShowing(){
     handler.addItem(this);
-    handler.addObject(bubble);
+    handler.addBubble(this.bubble);
     count = 0;
   }
 
