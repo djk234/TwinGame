@@ -118,6 +118,9 @@ public class KeyInput extends KeyAdapter {
           else if (Game.getPlayer().equip_sword.equals("NoviceSword")){
             Game.getPlayer().unequipSword();
           }
+          else {
+            Game.getPlayer().equipSword("NoviceSword");
+          }
         }
         else if (Game.pause.pageItem == 1){
           if (Game.getPlayer().equip_sword == null){
@@ -125,6 +128,9 @@ public class KeyInput extends KeyAdapter {
           }
           else if (Game.getPlayer().equip_sword.equals("WhiteSteelSword")){
             Game.getPlayer().unequipSword();
+          }
+          else {
+            Game.getPlayer().equipSword("WhiteSteelSword");
           }
         }
         else if (Game.pause.pageItem == 2){
@@ -134,6 +140,9 @@ public class KeyInput extends KeyAdapter {
           else if (Game.getPlayer().equip_sword.equals("SwordOfEternalLight")){
             Game.getPlayer().unequipSword();
           }
+          else {
+            Game.getPlayer().equipSword("SwordOfEternalLight");
+          }
         }
       }
       else if (Game.pause.page == 1){
@@ -141,24 +150,33 @@ public class KeyInput extends KeyAdapter {
           if (Game.getPlayer().equip_shield == null){
             Game.getPlayer().equipShield("RoundShield");
           }
-          else if (Game.getPlayer().equip_sword.equals("RoundShield")){
+          else if (Game.getPlayer().equip_shield.equals("RoundShield")){
             Game.getPlayer().unequipShield();
+          }
+          else {
+            Game.getPlayer().equipShield("RoundShield");
           }
         }
         else if (Game.pause.pageItem == 1){
           if (Game.getPlayer().equip_shield == null){
             Game.getPlayer().equipShield("StarShield");
           }
-          else if (Game.getPlayer().equip_sword.equals("StarShield")){
+          else if (Game.getPlayer().equip_shield.equals("StarShield")){
             Game.getPlayer().unequipShield();
+          }
+          else {
+            Game.getPlayer().equipShield("StarShield");
           }
         }
         else if (Game.pause.pageItem == 2){
           if (Game.getPlayer().equip_shield == null){
             Game.getPlayer().equipShield("ClearGlassShield");
           }
-          else if (Game.getPlayer().equip_sword.equals("ClearGlassShield")){
+          else if (Game.getPlayer().equip_shield.equals("ClearGlassShield")){
             Game.getPlayer().unequipShield();
+          }
+          else {
+            Game.getPlayer().equipShield("ClearGlassShield");
           }
         }
       }
