@@ -116,12 +116,30 @@ public class Pause extends GameObject{
       g.drawString("SWORDS", Game.WIDTH/2-Game.SQUARE-4, Game.SQUARE*5);
       for (int i = 0; i < inventory.size(); i++){
         if (inventory.get(i).name.contains("NoviceSword")){
+          if (Game.getPlayer().equip_sword == null){
+          }
+          else if (Game.getPlayer().equip_sword.equals("NoviceSword")){
+            g.setColor(Color.red);
+            g.fillRect(Game.SQUARE*2+filler+5,Game.SQUARE*6+5,Game.SQUARE*4-(5)*2,Game.SQUARE*4-(5)*2);
+          }
           g.drawImage(images.get(0),Game.SQUARE*2+filler,Game.SQUARE*6+10,null);
         }
         else if (inventory.get(i).name.contains("WhiteSteelSword")){
+          if (Game.getPlayer().equip_sword == null){
+          }
+          else if (Game.getPlayer().equip_sword.equals("WhiteSteelSword")){
+            g.setColor(Color.red);
+            g.fillRect(Game.SQUARE*6+filler*2+5,Game.SQUARE*6+5,Game.SQUARE*4-(5)*2,Game.SQUARE*4-(5)*2);
+          }
           g.drawImage(images.get(1),Game.SQUARE*6+filler*2,Game.SQUARE*6+10,null);
         }
         else if (inventory.get(i).name.contains("SwordOfEternalLight")){
+          if (Game.getPlayer().equip_sword == null){
+          }
+          else if (Game.getPlayer().equip_sword.equals("SwordOfEternalLight")){
+            g.setColor(Color.red);
+            g.fillRect(Game.SQUARE*10+filler*3+5,Game.SQUARE*6+5,Game.SQUARE*4-(5)*2,Game.SQUARE*4-(5)*2);
+          }
           g.drawImage(images.get(2),Game.SQUARE*10+filler*3,Game.SQUARE*6+10,null);
        }
       }
@@ -130,12 +148,30 @@ public class Pause extends GameObject{
       g.drawString("SHIELDS", Game.WIDTH/2-Game.SQUARE-10, Game.SQUARE*5);
       for (int i = 0; i < inventory.size(); i++){
         if (inventory.get(i).name.contains("RoundShield")){
+          if (Game.getPlayer().equip_shield == null){
+          }
+          else if (Game.getPlayer().equip_shield.equals("RoundShield")){
+            g.setColor(Color.red);
+            g.fillRect(Game.SQUARE*2+filler+5,Game.SQUARE*6+5,Game.SQUARE*4-(5)*2,Game.SQUARE*4-(5)*2);
+          }
           g.drawImage(images.get(3),Game.SQUARE*2+filler,Game.SQUARE*6,null);
         }
         else if (inventory.get(i).name.contains("StarShield")){
+          if (Game.getPlayer().equip_shield == null){
+          }
+          else if (Game.getPlayer().equip_shield.equals("StarShield")){
+            g.setColor(Color.red);
+            g.fillRect(Game.SQUARE*6+filler*2+5,Game.SQUARE*6+5,Game.SQUARE*4-(5)*2,Game.SQUARE*4-(5)*2);
+          }
           g.drawImage(images.get(4),Game.SQUARE*6+filler*2,Game.SQUARE*6+3,null);
         }
         else if (inventory.get(i).name.contains("ClearGlassShield")){
+          if (Game.getPlayer().equip_shield == null){
+          }
+          else if (Game.getPlayer().equip_shield.equals("ClearGlassShield")){
+            g.setColor(Color.red);
+            g.fillRect(Game.SQUARE*10+filler*3+5,Game.SQUARE*6+5,Game.SQUARE*4-(5)*2,Game.SQUARE*4-(5)*2);
+          }
           g.drawImage(images.get(5),Game.SQUARE*10+filler*3,Game.SQUARE*6+3,null);
         }
       }
@@ -143,6 +179,7 @@ public class Pause extends GameObject{
     if (page == 2){
       g.drawString("SPECIAL ITEMS", Game.WIDTH/2-Game.SQUARE-43, Game.SQUARE*5);
     }
+    g.setColor(Color.white);
     g.drawString("PAUSE", Game.WIDTH/2-Game.SQUARE+3, Game.SQUARE*2+5);
     int item_x = Game.SQUARE*3;
     int item_y = Game.SQUARE*3;

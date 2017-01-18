@@ -13,24 +13,87 @@ public class Player extends GameObject {
 
   Handler handler;
   private boolean intersecting = false;
+  public String equip_shield = null;
+  public String equip_sword = null;
+  public String equip_special = null;
   public boolean opening = false;
   public ArrayList<Item> inventory;
-  public static BufferedImage img;
-  public static BufferedImage img_walk_still;
-  public static BufferedImage img_walk_left;
-  public static BufferedImage img_walk_right;
+  public ArrayList<BufferedImage> front_images = new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> back_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> left_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> right_images= new ArrayList<BufferedImage>();
+  public static String direction = "Down";
   public static int walk = 0;
+  public static int img_index = 0;
 
   public Player(int x, int y, ID id, Handler handler) {
     super(x, y, id);
     this.handler = handler;
     this.inventory = new ArrayList<Item>();
-    try{
-      this.img = ImageIO.read(new File("Images/p1/p1_front_still.png"));
-      this.img_walk_still = this.img;
+    for (int i = 0; i < 4; i++){
+      try{
+        front_images.add(ImageIO.read(new File("Images/p1/p1_equip_none/p1_front_"+i+".png")));
+      }
+      catch(IOException ex){
+      }
     }
-    catch(IOException ex){
+    for (int i = 0; i < 4; i++){
+      try{
+        back_images.add(ImageIO.read(new File("Images/p1/p1_equip_none/p1_back_"+i+".png")));
+      }
+      catch(IOException ex){
+      }
     }
+    for (int i = 0; i < 4; i++){
+      try{
+        left_images.add(ImageIO.read(new File("Images/p1/p1_equip_none/p1_left_"+i+".png")));
+      }
+      catch(IOException ex){
+      }
+    }
+    for (int i = 0; i < 4; i++){
+      try{
+        right_images.add(ImageIO.read(new File("Images/p1/p1_equip_none/p1_right_"+i+".png")));
+      }
+      catch(IOException ex){
+      }
+    }
+  }
+
+  public void equipShield(String item){
+    for(int i = 0; i < inventory.size(); i++) {
+      if (inventory.get(i).name.equals(item)){
+        this.equip_shield = item;
+      }
+    }
+  }
+
+  public void unequipShield(){
+    this.equip_shield = null;
+  }
+
+  public void equipSword(String item){
+    for(int i = 0; i < inventory.size(); i++) {
+      if (inventory.get(i).name.equals(item)){
+        this.equip_sword = item;
+      }
+    }
+  }
+
+  public void unequipSword(){
+    this.equip_sword = null;
+  }
+
+  public void equipSpecial(String item){
+    for(int i = 0; i < inventory.size(); i++) {
+      if (inventory.get(i).name.equals(item)){
+        this.equip_special = item;
+      }
+    }
+  }
+
+  public void unequipSpecial(){
+    this.equip_special = null;
   }
 
   public void addItem(Item item){
@@ -50,46 +113,7 @@ public class Player extends GameObject {
   }
 
   public void setImg(String direction){
-    if (direction.equals("Up")){
-      try{
-        this.img = ImageIO.read(new File("Images/p1/p1_back_still.png"));
-        this.img_walk_still = this.img;
-        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_back_left.png"));
-        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_back_right.png"));
-      }
-      catch(IOException ex){
-      }
-    }
-    else if (direction.equals("Down")){
-      try{
-        this.img = ImageIO.read(new File("Images/p1/p1_front_still.png"));
-        this.img_walk_still = this.img;
-        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_front_left.png"));
-        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_front_right.png"));
-      }
-      catch(IOException ex){
-      }
-    }
-    else if (direction.equals("Right")){
-      try{
-        this.img = ImageIO.read(new File("Images/p1/p1_right_still.png"));
-        this.img_walk_still = this.img;
-        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_right_left.png"));
-        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_right_right.png"));
-      }
-      catch(IOException ex){
-      }
-    }
-    else if (direction.equals("Left")){
-      try{
-        this.img = ImageIO.read(new File("Images/p1/p1_left_still.png"));
-        this.img_walk_still = this.img;
-        this.img_walk_left = ImageIO.read(new File("Images/p1/p1_left_left.png"));
-        this.img_walk_right = ImageIO.read(new File("Images/p1/p1_left_right.png"));
-      }
-      catch(IOException ex){
-      }
-    }
+    this.direction = direction;
   }
 
   public Rectangle getBounds(){
@@ -104,20 +128,18 @@ public class Player extends GameObject {
     Game.setPlayerY(y);
     if (KeyInput.checkWalking()) {
       // Still
-      if ((walk%24 >= 0 && walk%24 < 6) || (walk%24 >= 12 && walk%24 < 18)){
-        this.img = this.img_walk_still;
+      if (walk == 6){
+        img_index++;
+        walk = 0;
       }
-      else if (walk%24 >= 6 && walk%24 < 12) {
-        this.img = this.img_walk_left;
+      if (img_index == 4){
+        img_index = 0;
       }
-      else if (walk%24 >= 18 && walk%24 <= 23) {
-        this.img = this.img_walk_right;
-      }
+      walk++;
     }
     else {
-      this.img = this.img_walk_still;
+      img_index = 0;
     }
-    walk++;
   }
 
   public NPC checkTalking(){
@@ -233,7 +255,18 @@ public class Player extends GameObject {
   }
 
   public void render(Graphics g) {
-    g.drawImage(this.img,Game.STARTX,Game.STARTY,null);
+    if (direction.equals("Up")){
+      g.drawImage(this.back_images.get(img_index),Game.STARTX,Game.STARTY,null);
+    }
+    else if (direction.equals("Down")){
+      g.drawImage(this.front_images.get(img_index),Game.STARTX,Game.STARTY,null);
+    }
+    else if (direction.equals("Left")){
+      g.drawImage(this.left_images.get(img_index),Game.STARTX,Game.STARTY,null);
+    }
+    else {
+      g.drawImage(this.right_images.get(img_index),Game.STARTX,Game.STARTY,null);
+    }
     g.setColor(new Color(70, 70, 70, 100));
     g.fillRect(Game.STARTX+6,Game.STARTY+27,10,1);
     g.fillRect(Game.STARTX+4,Game.STARTY+28,13,1);

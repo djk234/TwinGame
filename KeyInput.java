@@ -109,6 +109,63 @@ public class KeyInput extends KeyAdapter {
       }
     }
 
+    else if (key == KeyEvent.VK_ENTER && (state == State.Pause)) {
+      if (Game.pause.page == 0){
+        if (Game.pause.pageItem == 0){
+          if (Game.getPlayer().equip_sword == null){
+            Game.getPlayer().equipSword("NoviceSword");
+          }
+          else if (Game.getPlayer().equip_sword.equals("NoviceSword")){
+            Game.getPlayer().unequipSword();
+          }
+        }
+        else if (Game.pause.pageItem == 1){
+          if (Game.getPlayer().equip_sword == null){
+            Game.getPlayer().equipSword("WhiteSteelSword");
+          }
+          else if (Game.getPlayer().equip_sword.equals("WhiteSteelSword")){
+            Game.getPlayer().unequipSword();
+          }
+        }
+        else if (Game.pause.pageItem == 2){
+          if (Game.getPlayer().equip_sword == null){
+            Game.getPlayer().equipSword("SwordOfEternalLight");
+          }
+          else if (Game.getPlayer().equip_sword.equals("SwordOfEternalLight")){
+            Game.getPlayer().unequipSword();
+          }
+        }
+      }
+      else if (Game.pause.page == 1){
+        if (Game.pause.pageItem == 0){
+          if (Game.getPlayer().equip_shield == null){
+            Game.getPlayer().equipShield("RoundShield");
+          }
+          else if (Game.getPlayer().equip_sword.equals("RoundShield")){
+            Game.getPlayer().unequipShield();
+          }
+        }
+        else if (Game.pause.pageItem == 1){
+          if (Game.getPlayer().equip_shield == null){
+            Game.getPlayer().equipShield("StarShield");
+          }
+          else if (Game.getPlayer().equip_sword.equals("StarShield")){
+            Game.getPlayer().unequipShield();
+          }
+        }
+        else if (Game.pause.pageItem == 2){
+          if (Game.getPlayer().equip_shield == null){
+            Game.getPlayer().equipShield("ClearGlassShield");
+          }
+          else if (Game.getPlayer().equip_sword.equals("ClearGlassShield")){
+            Game.getPlayer().unequipShield();
+          }
+        }
+      }
+      else if (Game.pause.page == 2){
+
+      }
+    }
     if(key == KeyEvent.VK_ESCAPE) System.exit(1);
   }
 
