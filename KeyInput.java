@@ -18,7 +18,10 @@ public class KeyInput extends KeyAdapter {
     State state = Game.getState();
     boolean opening = Game.getPlayer().getOpening();
     // Go Up
-    if(key == 38 && !alreadyTalking && (state == State.Play) && !opening){
+    if(key == 32 && state == State.Play && !opening){
+      System.out.println("Attack");
+    }
+    else if(key == 38 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
       Game.getPlayer().setVelY(-2);
       Game.getPlayer().setImg("Up");

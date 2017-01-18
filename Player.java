@@ -29,80 +29,42 @@ public class Player extends GameObject {
   public ArrayList<BufferedImage> no_right_images= new ArrayList<BufferedImage>();
   //NS
   public ArrayList<BufferedImage> ns_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_left_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ns_right_images= new ArrayList<BufferedImage>();
   //WS
   public ArrayList<BufferedImage> ws_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_left_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ws_right_images= new ArrayList<BufferedImage>();
   //EL
   public ArrayList<BufferedImage> el_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_left_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> el_right_images= new ArrayList<BufferedImage>();
   //RS
   public ArrayList<BufferedImage> rs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> rs_back_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> rs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> rs_right_images= new ArrayList<BufferedImage>();
   //SS
   public ArrayList<BufferedImage> ss_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ss_back_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ss_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ss_right_images= new ArrayList<BufferedImage>();
   //CS
   public ArrayList<BufferedImage> cs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> cs_back_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> cs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> cs_right_images= new ArrayList<BufferedImage>();
   //NS_RS
   public ArrayList<BufferedImage> ns_rs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_rs_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_rs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_rs_right_images= new ArrayList<BufferedImage>();
   //NS_SS
   public ArrayList<BufferedImage> ns_ss_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_ss_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_ss_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_ss_right_images= new ArrayList<BufferedImage>();
   //NS_CS
   public ArrayList<BufferedImage> ns_cs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_cs_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_cs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ns_cs_right_images= new ArrayList<BufferedImage>();
   //WS_RS
   public ArrayList<BufferedImage> ws_rs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_rs_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_rs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_rs_right_images= new ArrayList<BufferedImage>();
   //WS_SS
   public ArrayList<BufferedImage> ws_ss_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_ss_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_ss_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_ss_right_images= new ArrayList<BufferedImage>();
   //WS_CS
   public ArrayList<BufferedImage> ws_cs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_cs_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_cs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> ws_cs_right_images= new ArrayList<BufferedImage>();
   //EL_RS
   public ArrayList<BufferedImage> el_rs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_rs_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_rs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_rs_right_images= new ArrayList<BufferedImage>();
   //EL_SS
   public ArrayList<BufferedImage> el_ss_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_ss_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_ss_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_ss_right_images= new ArrayList<BufferedImage>();
   //EL_CS
   public ArrayList<BufferedImage> el_cs_front_images = new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_cs_back_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_cs_left_images= new ArrayList<BufferedImage>();
-  public ArrayList<BufferedImage> el_cs_right_images= new ArrayList<BufferedImage>();
-
+  //
+  public ArrayList<BufferedImage> p1_back_equip_images = new ArrayList<BufferedImage>();
 
   public static String direction = "Down";
   public static int walk = 0;
@@ -124,93 +86,56 @@ public class Player extends GameObject {
     //ns
     String ext = "ns";
     addImages("p1_"+ext+"/p1_front_",ns_front_images);
-    addImages("p1_"+ext+"/p1_back_",ns_back_images);
-    addImages("p1_"+ext+"/p1_left_",ns_left_images);
-    addImages("p1_"+ext+"/p1_right_",ns_right_images);
+    addImages("p1_right_ns_",ns_right_images);
     //ws
     ext = "ws";
     addImages("p1_"+ext+"/p1_front_",ws_front_images);
-    addImages("p1_"+ext+"/p1_back_",ws_back_images);
-    addImages("p1_"+ext+"/p1_left_",ws_left_images);
-    addImages("p1_"+ext+"/p1_right_",ws_right_images);
+    addImages("p1_right_ws_",ws_right_images);
     //el
     ext = "el";
     addImages("p1_"+ext+"/p1_front_",el_front_images);
-    addImages("p1_"+ext+"/p1_back_",el_back_images);
-    addImages("p1_"+ext+"/p1_left_",el_left_images);
-    addImages("p1_"+ext+"/p1_right_",el_right_images);
+    addImages("p1_right_el_",el_right_images);
     //rs
     ext = "rs";
     addImages("p1_"+ext+"/p1_front_",rs_front_images);
-    addImages("p1_"+ext+"/p1_back_",rs_back_images);
-    addImages("p1_"+ext+"/p1_left_",rs_left_images);
-    addImages("p1_"+ext+"/p1_right_",rs_right_images);
+    addImages("p1_left_rs_",rs_left_images);
     //ss
     ext = "ss";
     addImages("p1_"+ext+"/p1_front_",ss_front_images);
-    addImages("p1_"+ext+"/p1_back_",ss_back_images);
-    addImages("p1_"+ext+"/p1_left_",ss_left_images);
-    addImages("p1_"+ext+"/p1_right_",ss_right_images);
+    addImages("p1_left_ss_",ss_left_images);
     //cs
     ext = "cs";
     addImages("p1_"+ext+"/p1_front_",cs_front_images);
-    addImages("p1_"+ext+"/p1_back_",cs_back_images);
-    addImages("p1_"+ext+"/p1_left_",cs_left_images);
-    addImages("p1_"+ext+"/p1_right_",cs_right_images);
+    addImages("p1_left_cs_",cs_left_images);
     //ns_rs
     ext = "ns_rs";
     addImages("p1_"+ext+"/p1_front_",ns_rs_front_images);
-    addImages("p1_"+ext+"/p1_back_",ns_rs_back_images);
-    addImages("p1_"+ext+"/p1_left_",ns_rs_left_images);
-    addImages("p1_"+ext+"/p1_right_",ns_rs_right_images);
     //ns_ss
     ext = "ns_ss";
     addImages("p1_"+ext+"/p1_front_",ns_ss_front_images);
-    addImages("p1_"+ext+"/p1_back_",ns_ss_back_images);
-    addImages("p1_"+ext+"/p1_left_",ns_ss_left_images);
-    addImages("p1_"+ext+"/p1_right_",ns_ss_right_images);
     //ns_cs
     ext = "ns_cs";
     addImages("p1_"+ext+"/p1_front_",ns_cs_front_images);
-    addImages("p1_"+ext+"/p1_back_",ns_cs_back_images);
-    addImages("p1_"+ext+"/p1_left_",ns_cs_left_images);
-    addImages("p1_"+ext+"/p1_right_",ns_cs_right_images);
     //ws_rs
     ext = "ws_rs";
     addImages("p1_"+ext+"/p1_front_",ws_rs_front_images);
-    addImages("p1_"+ext+"/p1_back_",ws_rs_back_images);
-    addImages("p1_"+ext+"/p1_left_",ws_rs_left_images);
-    addImages("p1_"+ext+"/p1_right_",ws_rs_right_images);
     //ws_ss
     ext = "ws_ss";
     addImages("p1_"+ext+"/p1_front_",ws_ss_front_images);
-    addImages("p1_"+ext+"/p1_back_",ws_ss_back_images);
-    addImages("p1_"+ext+"/p1_left_",ws_ss_left_images);
-    addImages("p1_"+ext+"/p1_right_",ws_ss_right_images);
     //ws_cs
     ext = "ws_cs";
     addImages("p1_"+ext+"/p1_front_",ws_cs_front_images);
-    addImages("p1_"+ext+"/p1_back_",ws_cs_back_images);
-    addImages("p1_"+ext+"/p1_left_",ws_cs_left_images);
-    addImages("p1_"+ext+"/p1_right_",ws_cs_right_images);
     //el_rs
     ext = "el_rs";
     addImages("p1_"+ext+"/p1_front_",el_rs_front_images);
-    addImages("p1_"+ext+"/p1_back_",el_rs_back_images);
-    addImages("p1_"+ext+"/p1_left_",el_rs_left_images);
-    addImages("p1_"+ext+"/p1_right_",el_rs_right_images);
     //el_ss
     ext = "el_ss";
     addImages("p1_"+ext+"/p1_front_",el_ss_front_images);
-    addImages("p1_"+ext+"/p1_back_",el_ss_back_images);
-    addImages("p1_"+ext+"/p1_left_",el_ss_left_images);
-    addImages("p1_"+ext+"/p1_right_",el_ss_right_images);
     //el_cs
     ext = "el_cs";
     addImages("p1_"+ext+"/p1_front_",el_cs_front_images);
-    addImages("p1_"+ext+"/p1_back_",el_cs_back_images);
-    addImages("p1_"+ext+"/p1_left_",el_cs_left_images);
-    addImages("p1_"+ext+"/p1_right_",el_cs_right_images);
+
+    addImages("p1_back_equip_", p1_back_equip_images);
   }
 
   public void addImages(String path, ArrayList<BufferedImage> images){
@@ -223,11 +148,13 @@ public class Player extends GameObject {
     }
   }
   public void equipShield(String item){
+    back_images = p1_back_equip_images;
     for(int i = 0; i < inventory.size(); i++) {
       if (inventory.get(i).name.equals(item)){
         this.equip_shield = item;
         if (item.equals("RoundShield")){
           front_images = rs_front_images;
+          left_images = rs_left_images;
           if (this.equip_sword != null){
             if (this.equip_sword.equals("NoviceSword")){
               front_images = ns_rs_front_images;
@@ -242,6 +169,7 @@ public class Player extends GameObject {
         }
         else if (item.equals("StarShield")){
           front_images = ss_front_images;
+          left_images = ss_left_images;
           if (this.equip_sword != null){
             if (this.equip_sword.equals("NoviceSword")){
               front_images = ns_ss_front_images;
@@ -256,6 +184,7 @@ public class Player extends GameObject {
         }
         else if (item.equals("ClearGlassShield")){
           front_images = cs_front_images;
+          left_images = cs_left_images;
           if (this.equip_sword != null){
             if (this.equip_sword.equals("NoviceSword")){
               front_images = ns_cs_front_images;
@@ -274,15 +203,30 @@ public class Player extends GameObject {
 
   public void unequipShield(){
     this.equip_shield = null;
-    front_images = no_front_images;
+    right_images = no_left_images;
+    if (this.equip_sword == null){
+      front_images = no_front_images;
+      back_images = no_back_images;
+    }
+    else if (this.equip_sword.equals("NoviceSword")){
+      front_images = ns_front_images;
+    }
+    else if (this.equip_sword.equals("WhiteSteelSword")){
+      front_images = ws_front_images;
+    }
+    else if (this.equip_sword.equals("SwordOfEternalLight")){
+      front_images = el_front_images;
+    }
   }
 
   public void equipSword(String item){
+    back_images = p1_back_equip_images;
     for(int i = 0; i < inventory.size(); i++) {
       if (inventory.get(i).name.equals(item)){
         this.equip_sword = item;
         if (item.equals("NoviceSword")){
           front_images = ns_front_images;
+          right_images = ns_right_images;
           if (this.equip_shield != null){
             if (this.equip_shield.equals("RoundShield")){
               front_images = ns_rs_front_images;
@@ -297,6 +241,7 @@ public class Player extends GameObject {
         }
         else if (item.equals("WhiteSteelSword")){
           front_images = ws_front_images;
+          right_images = ws_right_images;
           if (this.equip_shield != null){
             if (this.equip_shield.equals("RoundShield")){
               front_images = ws_rs_front_images;
@@ -311,6 +256,7 @@ public class Player extends GameObject {
         }
         else if (item.equals("SwordOfEternalLight")){
           front_images = el_front_images;
+          right_images = el_right_images;
           if (this.equip_shield != null){
             if (this.equip_shield.equals("RoundShield")){
               front_images = el_rs_front_images;
@@ -329,7 +275,20 @@ public class Player extends GameObject {
 
   public void unequipSword(){
     this.equip_sword = null;
-    front_images = no_front_images;
+    right_images = no_right_images;
+    if (this.equip_shield == null){
+      front_images = no_front_images;
+      back_images = no_back_images;
+    }
+    else if (this.equip_shield.equals("RoundShield")){
+      front_images = rs_front_images;
+    }
+    else if (this.equip_shield.equals("StarShield")){
+      front_images = ss_front_images;
+    }
+    else if (this.equip_shield.equals("ClearGlassShield")){
+      front_images = cs_front_images;
+    }
   }
 
   public void equipSpecial(String item){
