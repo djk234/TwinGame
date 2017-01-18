@@ -17,7 +17,9 @@ public class Player extends GameObject {
   public String equip_sword = null;
   public String equip_special = null;
   public boolean opening = false;
+  public boolean attacking = false;
   public ArrayList<Item> inventory;
+  public ArrayList<BufferedImage> temp_images;
   public ArrayList<BufferedImage> front_images;
   public ArrayList<BufferedImage> back_images;
   public ArrayList<BufferedImage> left_images;
@@ -30,6 +32,7 @@ public class Player extends GameObject {
   //NS
   public ArrayList<BufferedImage> ns_front_images = new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ns_right_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> ns_front_attack_images= new ArrayList<BufferedImage>();
   //WS
   public ArrayList<BufferedImage> ws_front_images = new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ws_right_images= new ArrayList<BufferedImage>();
@@ -68,6 +71,7 @@ public class Player extends GameObject {
 
   public static String direction = "Down";
   public static int walk = 0;
+  public static int attack = -1;
   public static int img_index = 0;
 
   public Player(int x, int y, ID id, Handler handler) {
@@ -87,6 +91,7 @@ public class Player extends GameObject {
     String ext = "ns";
     addImages("p1_"+ext+"/p1_front_",ns_front_images);
     addImages("p1_right_ns_",ns_right_images);
+    addImages("p1_ns_front_attack_",ns_front_attack_images);
     //ws
     ext = "ws";
     addImages("p1_"+ext+"/p1_front_",ws_front_images);
@@ -319,6 +324,10 @@ public class Player extends GameObject {
     this.opening = opening;
   }
 
+  public void setAttacking(boolean attacking){
+    this.attacking = attacking;
+  }
+
   public void setImg(String direction){
     this.direction = direction;
   }
@@ -333,7 +342,30 @@ public class Player extends GameObject {
     collision();
     Game.setPlayerX(x);
     Game.setPlayerY(y);
-    if (KeyInput.checkWalking()) {
+    if (attacking){
+      if (attack == -1){
+        if (equip_sword != null){
+          attack++;
+          img_index = attack;
+          temp_images = front_images;
+          front_images = ns_front_attack_images;
+        }
+        else {
+          attacking = false;
+        }
+      }
+      else if (attack == 3){
+        front_images = temp_images;
+        img_index = 0;
+        attack = -1;
+        attacking = false;
+      }
+      else {
+        attack++;
+        img_index = attack;
+      }
+    }
+    else if (KeyInput.checkWalking()) {
       // Still
       if (walk == 6){
         img_index++;

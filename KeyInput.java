@@ -20,6 +20,7 @@ public class KeyInput extends KeyAdapter {
     // Go Up
     if(key == 32 && state == State.Play && !opening){
       System.out.println("Attack");
+      Game.getPlayer().setAttacking(true);
     }
     else if(key == 38 && !alreadyTalking && (state == State.Play) && !opening){
       this.walking = true;
