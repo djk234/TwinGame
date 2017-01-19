@@ -19,7 +19,9 @@ public class Player extends GameObject {
   public boolean opening = false;
   public boolean attacking = false;
   public ArrayList<Item> inventory;
-  public ArrayList<BufferedImage> temp_images;
+  public ArrayList<BufferedImage> temp_front_images;
+  public ArrayList<BufferedImage> temp_right_images;
+  public ArrayList<BufferedImage> temp_left_images;
   public ArrayList<BufferedImage> front_images;
   public ArrayList<BufferedImage> back_images;
   public ArrayList<BufferedImage> left_images;
@@ -33,12 +35,17 @@ public class Player extends GameObject {
   public ArrayList<BufferedImage> ns_front_images = new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ns_right_images= new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ns_front_attack_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> ns_right_attack_images= new ArrayList<BufferedImage>();
   //WS
   public ArrayList<BufferedImage> ws_front_images = new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> ws_right_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> ws_front_attack_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> ws_right_attack_images= new ArrayList<BufferedImage>();
   //EL
   public ArrayList<BufferedImage> el_front_images = new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> el_right_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> el_front_attack_images= new ArrayList<BufferedImage>();
+  public ArrayList<BufferedImage> el_right_attack_images= new ArrayList<BufferedImage>();
   //RS
   public ArrayList<BufferedImage> rs_front_images = new ArrayList<BufferedImage>();
   public ArrayList<BufferedImage> rs_left_images= new ArrayList<BufferedImage>();
@@ -92,14 +99,19 @@ public class Player extends GameObject {
     addImages("p1_"+ext+"/p1_front_",ns_front_images);
     addImages("p1_right_ns_",ns_right_images);
     addImages("p1_ns_front_attack_",ns_front_attack_images);
+    addImages("p1_ns_right_attack_",ns_right_attack_images);
     //ws
     ext = "ws";
     addImages("p1_"+ext+"/p1_front_",ws_front_images);
     addImages("p1_right_ws_",ws_right_images);
+    addImages("p1_ws_front_attack_",ws_front_attack_images);
+    addImages("p1_ws_right_attack_",ws_right_attack_images);
     //el
     ext = "el";
     addImages("p1_"+ext+"/p1_front_",el_front_images);
     addImages("p1_right_el_",el_right_images);
+    addImages("p1_el_front_attack_",el_front_attack_images);
+    addImages("p1_el_right_attack_",el_right_attack_images);
     //rs
     ext = "rs";
     addImages("p1_"+ext+"/p1_front_",rs_front_images);
@@ -347,15 +359,28 @@ public class Player extends GameObject {
         if (equip_sword != null){
           attack++;
           img_index = attack;
-          temp_images = front_images;
-          front_images = ns_front_attack_images;
+          temp_front_images = front_images;
+          temp_right_images = right_images;
+          if (equip_sword.equals("NoviceSword")){
+            front_images = ns_front_attack_images;
+            right_images = ns_right_attack_images;
+          }
+          else if(equip_sword.equals("WhiteSteelSword")){
+            front_images = ws_front_attack_images;
+            right_images = ws_right_attack_images;
+          }
+          else if(equip_sword.equals("SwordOfEternalLight")){
+            front_images = el_front_attack_images;
+            right_images = el_right_attack_images;
+          }
         }
         else {
           attacking = false;
         }
       }
       else if (attack == 3){
-        front_images = temp_images;
+        front_images = temp_front_images;
+        right_images = temp_right_images;
         img_index = 0;
         attack = -1;
         attacking = false;
@@ -473,7 +498,7 @@ public class Player extends GameObject {
         }
         if (tempChest != null){
           if(getBounds().intersects(tempChest.getBounds())){
-            if (Math.abs((y - velY) - tempChest.getY()%Game.HEIGHT) < Game.SQUARE/2){
+            if (Math.abs((y - velY) - tempChest.getY()%Game.HEIGHT) < Game.SQUARE){
               x -= velX;
               velX = 0;
             }
